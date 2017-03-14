@@ -4,7 +4,7 @@
  * Date: 17/2/28
  * Time: 14:27
  */
-include "comment.php";
+require_once "comment.php";
 
 class controllerBase {
     protected $_islogin = true;
@@ -27,19 +27,22 @@ class controllerBase {
             $params = $_GET['request'];
         }
         $safeParams = array();
-        foreach ($params as $key => $v) {
-            if (!empty($this->_fields) && !in_array($key, $this->_fields)) {
-                continue;
-            }
-            if (is_array($v)) {
-                foreach ($v as $kk => $vv) {
-                    $safeParams[$key][$kk] = htmlEncode($vv);
+        if (!empty($params)) {
+            foreach ($params as $key => $v) {
+                if (!empty($this->_fields) && !in_array($key, $this->_fields)) {
+                    continue;
                 }
-            }else {
-                $safeParams[$key] = htmlEncode($v);
+                if (is_array($v)) {
+                    foreach ($v as $kk => $vv) {
+                        $safeParams[$key][$kk] = htmlEncode($vv);
+                    }
+                }else {
+                    $safeParams[$key] = htmlEncode($v);
+                }
             }
         }
         //$this->addPageView($this->_curUser, $safeParams);  添加用户访问的记录
+        return $safeParams;
     }
 
 }

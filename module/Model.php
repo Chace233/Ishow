@@ -63,6 +63,9 @@ class Model {
 		}
 		$this->slaveConn();
 		$res = $this->_sdb->query($sql,MYSQLI_USE_RESULT);
+		if (false === $res) {
+			return false;
+		}
 		$row = $res->fetch_assoc();
 		return $row;
 	}
@@ -130,11 +133,24 @@ class Model {
 	 * @param $sql
 	 * @return bool
 	 */
-	public function update($sql) {
-		if (empty($sql)) {
+	public function update($editArr, $whereArr) {
+		if (empty($editArr) || empty($whereArr)) {
 			return false;
 		}
 		$this->masterConn();
+		$editArr = $this->handleString($editArr);
+		$whereArr = $this->handleString($whereArr);
+		$set = array();
+		foreach ($editArr as $k => $v) {
+			$set[] = $k . ' = ' . $v;
+		}
+		$where = array();
+		foreach ($whereArr as $k => $v) {
+			$where[] = $k . ' = ' . $v;
+		}
+		$sql = "UPDATE " . $this->_tbName . "
+				SET " . implode(' , ' , $set) . "
+				WHERE " . implode(' AND ', $where);
 		$res = $this->_mdb->query($sql);
 		if (false === $res) {
 			return false;

@@ -4,8 +4,9 @@
  * 公共方法
  */
 
+
 /**
- * 编码
+ * 过滤
  * @param string $content 过滤内容
  * @return string 编码后的字符串
  */
@@ -63,3 +64,4 @@ function getAvatarUrl() {
 
 
 }
+
