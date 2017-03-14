@@ -57,13 +57,13 @@ class Model {
 	 * @param string $sql 查询语句
 	 * @return 成功返回结果
 	 */
-	public function query($sql) {
+	public function Query($sql) {
 		if (empty($sql)) {
 			return false;
 		}
 		$this->slaveConn();
 		$res = $this->_sdb->query($sql,MYSQLI_USE_RESULT);
-		$row=$res->fetch_all();
+		$row = $res->fetch_assoc();
 		return $row;
 	}
 
@@ -111,11 +111,13 @@ class Model {
 	 * @param $sql
 	 * @return 成功返回id
 	 */
-	public function insert($sql) {
-		if (empty($sql)) {
+	public function insert($addArr) {
+		if (empty($addArr)) {
 			return false;
 		}
+		$addArr = $this->handleString($addArr);
 		$this->masterConn();
+		$sql = "INSERT INTO " . $this->_tbName . " (" . implode(' , ', array_flip($addArr)) . ") VALUES(" . implode(' , ', $addArr) . ")";
 		$res = $this->_mdb->query($sql);
 		if (false === $res) {
 			return false;
@@ -187,6 +189,26 @@ class Model {
 			'error' => $this->_mdb->error(),
 		);
 		return $error;
+	}
+
+	/**
+	 * 对insert的字符串进行处理
+	 * @param $addArr
+	 * @return array|bool
+	 */
+	public function handleString($addArr) {
+		if (empty($addArr)) {
+			return false;
+		}
+		$result = array();
+		foreach ($addArr as $k => $v) {
+			if (is_int($v) && !is_string($v)) {
+				$result[$k] = $v;
+			} else {
+				$result[$k] = "'" . $v . "'";
+			}
+		}
+		return $result;
 	}
 }
 
