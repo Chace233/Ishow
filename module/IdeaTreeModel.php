@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base Model(数据层基类)
+ * IdeaTree Model
  * @author zoubing
  */
 
@@ -58,6 +58,21 @@ class IdeaTreeModel extends Model {
         $res = $this->Query($sql);
 
     	return $res["text"];
+    }
+
+    public function addLeaf($pid, $text, $uid) {
+        $data = array('pid' => $pid, 'text' => $text, 'uid' => $uid);
+
+        $ret = $this->insertRaw($data,'`ideatree`');
+        return $ret==0?false:true;
+    }
+
+    public function modifyLeaf($tid, $text){
+        $whereArr = array('tid' => $tid);
+        $setArr   = array('text' => $text);
+
+        $ret = $this->updateRaw($setArr, $whereArr, '`ideatree`');
+        return $ret;
     }
 }
 

@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: chenlin15
- * Date: 17/3/14
- * Time: 16:59
+ * @author: zoubing
+ * @date:   2017-3-20
  */
 
 require_once 'global.php';
