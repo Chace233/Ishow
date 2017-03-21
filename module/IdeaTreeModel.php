@@ -30,6 +30,35 @@ class IdeaTreeModel extends Model {
 
     	return $rows;
     }
+
+    public function getUserLeaves($root, $uid) {
+        $sql = "SELECT * FROM ". $this->tb_ideatree ." WHERE `UID`=".$uid;
+
+		if (!empty($root)) {
+           $sql .= " WHERE `ROOT`=".$root;
+		}
+        $res = $this->QueryAll($sql);
+
+        $rows = array();
+        for($i=0;$i<sizeof($res);$i++){
+            $rows[$i]['user_id']   = $res[$i]['uid'];
+            $rows[$i]['leaf_id']   = $res[$i]['tid'];
+            $rows[$i]['parent_id'] = $res[$i]['pid'];
+        }
+
+    	return $rows;
+    }
+
+    public function getLeaf($root, $tid) {
+        $sql = "SELECT text FROM ". $this->tb_ideatree ." WHERE `TID`=".$tid;
+
+		if (!empty($root)) {
+           $sql .= " WHERE `ROOT`=".$root;
+		}
+        $res = $this->Query($sql);
+
+    	return $res["text"];
+    }
 }
 
 ?>
