@@ -70,9 +70,9 @@ function getAvatarUrl() {
 
 function aj_output ($errno, $errmsg = '', $result = '', $callback = '') {
     if (empty($errno)) {
-        $errmsg = ErrorMsg::getMsy($errmsg);
+        $errmsg = ErrorMsg::getMsg($errmsg);
     }
-    $output = array('errno' => $errno, 'errmsg' => $errmsg, 'result' => $result);
+    $output = array('code' => $errno, 'msg' => $errmsg, 'data' => $result);
     if (preg_match('/[A-Za-z].*/', $callback)) {
         echo ' ' . $callback . '(' . json_encode($output, JSON_UNESCAPED_UNICODE) . ')';
     } else {

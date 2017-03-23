@@ -24,7 +24,7 @@ class getUserInfos extends controllerBase {
         $params = $this->getParams();
         $userModel = new UserModel();
         $userinfos = $userModel->getUserInfos(array('uid' => $params['uid']));
-        var_dump($userinfos);
+        aj_output(ErrorMsg::SUCCESS, '', $userinfos);
     }
 }
 

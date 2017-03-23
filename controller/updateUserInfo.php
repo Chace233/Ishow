@@ -21,7 +21,10 @@ class updateUserInfo extends controllerBase {
         $edit['tel'] = $params['tel'];
         $userModel = new UserModel();
         $res = $userModel->update($edit, $where);
-        var_dump($res);
+        if (false === $res) {
+            aj_output(ErrorMsg::ERROR_SUBMIT);
+        }
+        aj_output(ErrorMsg::SUCCESS);
     }
 }
 

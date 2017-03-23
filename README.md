@@ -14,7 +14,6 @@ template : 视图文件
 
 
 数据传输方式: ajax
-所有的请求数据都放到名称为request的数组里一起穿到后端。
 
 数据获取统一调用getParams()方法
 数据返回统一调用aj_output()方法

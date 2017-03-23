@@ -1,6 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: chenlin15
  * Date: 17/3/17
  * Time: 11:25
@@ -19,7 +18,11 @@ class MyCollections extends controllerBase {
     public function run() {
         $params = $this->getParams();
         if (empty($params['uid'])) {
-            
+            aj_output(ErrorMsg::NOUID);
         }
+        $collectionsModel = new CollectionsModel();
+        $res = $collectionsModel->getCollectionInfos(array('uid' => $params['uid']));
+        aj_output(ErrorMsg::SUCCESS,'', $res);
     }
 }
+new MyCollections();

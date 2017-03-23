@@ -5,10 +5,11 @@
  * Time: 14:27
  */
 require_once "comment.php";
+require_once "error.php";
 
 class controllerBase {
     protected $_islogin = true;
-    protected $_fields  = array();
+    protected $_fields  = array(); //请求参数过滤
     protected $_curUser = array();
     /**
      * 初始化
@@ -22,9 +23,9 @@ class controllerBase {
      */
     public function getParams() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $params = $_POST['request'];
+            $params = $_POST;
         } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $params = $_GET['request'];
+            $params = $_GET;
         }
         $safeParams = array();
         if (!empty($params)) {
