@@ -6,6 +6,8 @@
  * Time: 17:35
  */
 
+header("Content-Type: text/html; charset=utf8");
+
 define('URI_HOST', '/Library/WebServer/Documents/myWeb');
 
 define('COMPETITION_STATUS_NOMAL', 1); //比赛状态正常

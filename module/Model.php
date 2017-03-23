@@ -63,11 +63,34 @@ class Model {
 		}
 		$this->slaveConn();
 		$res = $this->_sdb->query($sql,MYSQLI_USE_RESULT);
+
 		if (false === $res) {
 			return false;
 		}
 		$row = $res->fetch_assoc();
 		return $row;
+	}
+
+	/**
+	 * 查询
+	 * @param string $sql 查询语句
+	 * @return 成功返回结果
+	 */
+	public function QueryAll($sql) {
+		if (empty($sql)) {
+			return false;
+		}
+		$this->slaveConn();
+		$res = $this->_sdb->query($sql,MYSQLI_USE_RESULT);
+		
+		if (false === $res) {
+			return false;
+		}
+		$rows = array();
+        while($r = $res->fetch_assoc()){
+        	$rows[] = $r;
+        }
+		return $rows;
 	}
 
 	/**
@@ -129,6 +152,24 @@ class Model {
 	}
 
 	/**
+	 * @param $sql
+	 * @return 成功返回id
+	 */
+	public function insertRaw($addArr,$tbname) {
+		if (empty($addArr)) {
+			return false;
+		}
+		$addArr = $this->handleString($addArr);
+		$this->masterConn();
+		$sql = "INSERT INTO " .$tbname . " (" . implode(' , ', array_flip($addArr)) . ") VALUES(" . implode(' , ', $addArr) . ")";
+		$res = $this->_mdb->query($sql);
+		if (false === $res) {
+			return false;
+		}
+		return $this->_mdb->insert_id;
+	}
+
+	/**
 	 * 更新
 	 * @param $sql
 	 * @return bool
@@ -149,6 +190,36 @@ class Model {
 			$where[] = $k . ' = ' . $v;
 		}
 		$sql = "UPDATE " . $this->_tbName . "
+				SET " . implode(' , ' , $set) . "
+				WHERE " . implode(' AND ', $where);
+		$res = $this->_mdb->query($sql);
+		if (false === $res) {
+			return false;
+		}
+		return $res;
+	}
+
+	/**
+	 * 更新
+	 * @param $sql
+	 * @return bool
+	 */
+	public function updateRaw($editArr, $whereArr, $tbname) {
+		if (empty($editArr) || empty($whereArr)) {
+			return false;
+		}
+		$this->masterConn();
+		$editArr = $this->handleString($editArr);
+		$whereArr = $this->handleString($whereArr);
+		$set = array();
+		foreach ($editArr as $k => $v) {
+			$set[] = $k . ' = ' . $v;
+		}
+		$where = array();
+		foreach ($whereArr as $k => $v) {
+			$where[] = $k . ' = ' . $v;
+		}
+		$sql = "UPDATE " . $tbname . "
 				SET " . implode(' , ' , $set) . "
 				WHERE " . implode(' AND ', $where);
 		$res = $this->_mdb->query($sql);
