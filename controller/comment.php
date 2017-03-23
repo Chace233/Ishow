@@ -5,6 +5,8 @@
  */
 
 
+require_once 'error.php';
+
 /**
  * 过滤
  * @param string $content 过滤内容
@@ -63,5 +65,19 @@ function getIp() {
 function getAvatarUrl() {
 
 
+}
+
+
+function aj_output ($errno, $errmsg = '', $result = '', $callback = '') {
+    if (empty($errno)) {
+        $errmsg = ErrorMsg::getMsy($errmsg);
+    }
+    $output = array('errno' => $errno, 'errmsg' => $errmsg, 'result' => $result);
+    if (preg_match('/[A-Za-z].*/', $callback)) {
+        echo ' ' . $callback . '(' . json_encode($output, JSON_UNESCAPED_UNICODE) . ')';
+    } else {
+        echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    }
+    exit(0);
 }
 
