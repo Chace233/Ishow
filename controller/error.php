@@ -16,6 +16,12 @@ class ErrorMsg{
     const COLLECTED         = 20007;//已经收藏过了
     const NOCCID            = 20008;//缺少ccid参数
     const ERROR_ARGUMENT    = 20009;//参数错误
+    const ERREMAIL          = 20010;//email错误
+    const ERRUID            = 20011;//UID错误,查询不到该uid
+    const ERRNAMED          = 20012;//uname重复
+    const NOWORK            = 20013;//没有改作品
+    const NOPASSWD          = 20014;//没有输入密码
+    const NOUSER            = 20015;//没有该用户
 
 
     static $msg = array(
@@ -29,6 +35,12 @@ class ErrorMsg{
         self::COLLECTED        => '已经收藏过了',
         self::NOCCID           => '缺少ccid参数',
         self::ERROR_ARGUMENT   => '参数错误',
+        self::ERREMAIL         => 'email错误',
+        self::ERRUID           => 'UID错误,查询不到该UID',
+        self::ERRNAMED         => '该uname已经被使用',
+        self::NOWORK           => '没有该作品',
+        self::NOPASSWD         => '缺少密码',
+        self::NOUSER           => '没有该用户',
     );
 
 

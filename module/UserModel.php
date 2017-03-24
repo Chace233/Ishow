@@ -19,7 +19,7 @@ class UserModel extends Model {
     }
 
     public function getUserInfos($condition, $page = 1, $pagesize = 20) {
-        $sql = "SELECT `uid`, `uname`, `tel`, `email`, `intro`, `feature`, `create_time`, `islogin`
+        $sql = "SELECT `uid`, `uname`, `tel`, `email`, `intro`, `feature`, `create_time`, `islogin`, `headpic`
                 FROM " . $this->_tbName;
         $whereArr = array();
         if (!empty($condition['uid'])) {
@@ -30,7 +30,7 @@ class UserModel extends Model {
             }
         }
         if (!empty($condition['uname'])) {
-            $whereArr[] = "`uname` = " . $condition['uname'];
+            $whereArr[] = "`uname` = '" . $condition['uname'] . "'";
         }
         if (!empty($condition['feature'])) {
             $whereArr[] = "`feature` = " . $condition['feature'];

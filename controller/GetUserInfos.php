@@ -11,7 +11,7 @@ require_once 'controllerBase.php';
 require_once '../module/UserModel.php';
 
 class getUserInfos extends controllerBase {
-    protected $_fields = array('uid', 'uname');
+    protected $_fields = array('uname');
 
     /**
      * getUserInfos constructor.
@@ -23,7 +23,7 @@ class getUserInfos extends controllerBase {
     public function run() {
         $params = $this->getParams();
         $userModel = new UserModel();
-        $userinfos = $userModel->getUserInfos(array('uid' => $params['uid']));
+        $userinfos = $userModel->getUserInfos(array('uname' => $params['uname']));
         aj_output(ErrorMsg::SUCCESS, '', $userinfos);
     }
 }

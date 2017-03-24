@@ -11,7 +11,6 @@ require_once '../module/WorksModel.php';
 require_once '../module/CompetitionsModel.php';
 
 class MyCollections extends controllerBase {
-    protected $_fields = array('uid');
 
     public function __construct() {
         $this->run();
@@ -19,6 +18,7 @@ class MyCollections extends controllerBase {
 
     public function run() {
         $params = $this->getParams();
+        $params['uid'] = $this->_curUser['uid'];
         if (empty($params['uid'])) {
             aj_output(ErrorMsg::NOUID);
         }

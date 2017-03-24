@@ -12,3 +12,5 @@ define('URI_HOST', '/Library/WebServer/Documents/myWeb');
 
 define('COMPETITION_STATUS_NOMAL', 1); //比赛状态正常
 define('COMPETITION_STATUS_DEL', 2); //比赛状态删除
+
+define('ISHOW_COOKIE_NAME', 'MDISHOWSID');

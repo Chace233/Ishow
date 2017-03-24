@@ -6,6 +6,9 @@
  */
 require_once "comment.php";
 require_once "error.php";
+require_once "score.conf.php";
+require_once "global.php";
+require_once "../module/UserModel.php";
 
 class controllerBase {
     protected $_islogin = true;
@@ -22,6 +25,7 @@ class controllerBase {
      * 获取表单数据
      */
     public function getParams() {
+        $this->getCurUser();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $params = $_POST;
         } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -44,6 +48,23 @@ class controllerBase {
         }
         //$this->addPageView($this->_curUser, $safeParams);  添加用户访问的记录
         return $safeParams;
+    }
+
+    /**
+     * 获取当前用户信息
+     * @return bool
+     */
+    public function getCurUser() {
+        if ($this->_islogin) {
+            $uid = $_COOKIE[ISHOW_COOKIE_NAME];
+            $userModel = new UserModel();
+            $userInfo = $userModel->getUserInfos(array('uid' => $uid));
+            $this->_curUser = current($userInfo);
+            if (empty($this->_curUser)) {
+                aj_output(ErrorMsg::NOUSER);
+            }
+        }
+        return true;
     }
 
 }
