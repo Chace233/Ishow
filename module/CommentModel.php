@@ -8,5 +8,13 @@
 include "Model.php";
 
 class CommentModel extends Model {
+    protected $_tbName = '`tblComment`';
+
+    /**
+     * CommentModel constructor.
+     */
+    public function __construct() {
+
+    }
 
 }

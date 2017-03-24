@@ -6,16 +6,46 @@
  * Time: 10:25
  */
 
-include 'Model.php';
+require_once 'Model.php';
 
 class CompetitionsModel extends Model{
+
     protected $_tbName = '`tblCompetitions`';
 
-    /**
-     * 构造函数
-     */
-	public function __construct() {
+    public function getCompetitionInfos($condition, $page=1, $pagesize=25) {
+        $sql = 'SELECT `cpid`, `title`, `content`, `create_time`, `status`, `download`, `start_time`, `end_time`, `type`
+                FROM ' . $this->_tbName;
+        $whereArr = array();
+        if (!empty($condition['cpid'])) {
+            if (is_array($condition['cpid'])) {
+                $whereArr['cpid'] = '`cpid` IN (' . implode(', ', $condition['cpid']);
+            } else {
+                $whereArr['cpid'] = '`cpid` = ' . $condition['cpid'];
+            }
+        }
+        if (!empty($condition['type'])) {
+            $whereArr['type'] = '`type` = ' . $condition['type'];
+        }
+        if (!empty($whereArr)) {
+            $sql .= ' WHERE ' . implode(' AND ', $whereArr) . ') ';
+        }
+        $sql .= ' ORDER BY `start_time` DESC LIMIT ' . ($page - 1) * $pagesize . ', ' . $pagesize;
+        $res = $this->Query($sql);
+        return $res;
+    }
 
+    public function getCompetitionInfoByCpids($cpids) {
+        if (empty($cpids)) {
+            return false;
+        }
+        $res = $this->getCompetitionInfos(array('cpid' => $cpids));
+        $result = array();
+        if (!empty($res)) {
+            foreach ($res as $v) {
+                $result[$v['cpid']] = $v;
+            }
+        }
+        return $result;
     }
 
     public function addCompetitions($addArr) {

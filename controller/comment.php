@@ -59,18 +59,21 @@ function getIp() {
     return $realip;
 }
 
+function base642Image() {
+    ini_set("pcre.backtrack_limit", 1000000);
+    preg_match_all('/src="([^]*?),([^"]*?)"/si');
+}
+
 /**
  * 获取头像地址
  */
-function getAvatarUrl() {
-
-
+function getAvatarUrl($content) {
 }
 
 
 function aj_output ($errno, $errmsg = '', $result = '', $callback = '') {
-    if (empty($errno)) {
-        $errmsg = ErrorMsg::getMsg($errmsg);
+    if (empty($errmsg)) {
+        $errmsg = ErrorMsg::getMsg($errno);
     }
     $output = array('code' => $errno, 'msg' => $errmsg, 'data' => $result);
     if (preg_match('/[A-Za-z].*/', $callback)) {

@@ -67,8 +67,11 @@ class Model {
 		if (false === $res) {
 			return false;
 		}
-		$row = $res->fetch_assoc();
-		return $row;
+		$rows = array();
+		while($r = $res->fetch_assoc()){
+			$rows[] = $r;
+		}
+		return $rows;
 	}
 
 	/**
@@ -134,8 +137,9 @@ class Model {
 	}
 
 	/**
-	 * @param $sql
-	 * @return 成功返回id
+	 * @param $addArr
+	 * @param $tbname
+	 * @return bool
 	 */
 	public function insert($addArr) {
 		if (empty($addArr)) {
@@ -152,8 +156,9 @@ class Model {
 	}
 
 	/**
-	 * @param $sql
-	 * @return 成功返回id
+	 * @param $addArr
+	 * @param $tbname
+	 * @return bool
 	 */
 	public function insertRaw($addArr,$tbname) {
 		if (empty($addArr)) {
