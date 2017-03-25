@@ -22,6 +22,7 @@ class ErrorMsg{
     const NOWORK            = 20013;//没有改作品
     const NOPASSWD          = 20014;//没有输入密码
     const NOUSER            = 20015;//没有该用户
+    const HAVEDTITLE        = 20016;//title重复
 
 
     static $msg = array(
@@ -41,6 +42,7 @@ class ErrorMsg{
         self::NOWORK           => '没有该作品',
         self::NOPASSWD         => '缺少密码',
         self::NOUSER           => '没有该用户',
+        self::HAVEDTITLE       => '已经存在改title',
     );
 
 

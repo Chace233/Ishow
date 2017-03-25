@@ -10,6 +10,7 @@ require_once "controllerBase.php";
 require_once "../module/WorksModel.php";
 
 class GetWorkInfos extends controllerBase {
+    protected $_fields = array('op', 'type', 'wid');
 
     /**
      * GetWorkInfos constructor.
@@ -25,9 +26,15 @@ class GetWorkInfos extends controllerBase {
      */
     public function run() {
         $params = $this->getParams();
-        $uid = $this->_curUser['uid'];
         $worksModel = new WorksModel();
-        $res = $worksModel->getWorkInfos(array('create_uid' => $uid));
+        if (!isset($params['op'])) {
+            $uid = $this->_curUser['uid'];
+            $res = $worksModel->getWorkInfos(array('create_uid' => $uid, 'status' => 1));
+        } else if ($params['op'] == 'list') {
+            $res = $worksModel->getWorkInfos(array('status' => 1));
+        } else if (empty($params['wid'])) {
+            $res = $worksModel->getWorkInfos(array('wid' => $params['wid']));
+        }
         aj_output(ErrorMsg::SUCCESS, '', $res);
     }
 }

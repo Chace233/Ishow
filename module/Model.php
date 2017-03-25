@@ -271,7 +271,7 @@ class Model {
 	 * @return mixed
 	 */
 	public function rollback() {
-		return $this->_mb->rollback();
+		return $this->_mdb->rollback();
 	}
 
 	public function getError() {

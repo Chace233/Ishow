@@ -11,6 +11,7 @@ require_once '../module/UserModel.php';
 
 class register extends controllerBase {
     protected $_fields = array('uname', 'tel', 'email', 'intro', 'feature', 'headpic', 'passwd');
+    protected $_islogin = false;
 
     public function __construct() {
         $this->run();
@@ -36,6 +37,7 @@ class register extends controllerBase {
             aj_output(ErrorMsg::ERREMAIL);
         }
         $addArr = array(
+            'uid'         => time() + 1,
             'uname'       => $params['uname'],
             'tel'         => empty($params['tel']) ? '' : $params['tel'],
             'email'       => empty($params['email']) ? '' : $params['email'],

@@ -11,7 +11,7 @@ class WorksModel extends Model {
     protected $_tbName = '`tblworks`';
 
     public function getWorkInfos($condition, $page = 1, $pagesize = 25) {
-        $sql = 'SELECT `wid`, `title`, `content`, `create_time`, `create_uid`, `comment_num`, `collection_num`, `brower_num`, `status`, `vote_num`
+        $sql = 'SELECT `wid`, `title`, `content`, `create_time`, `create_uid`, `comment_num`, `collection_num`, `brower_num`, `status`, `vote_num`, `title_key`
                 FROM ' . $this->_tbName;
         $whereArr = array();
         if (!empty($condition['wid'])) {
@@ -20,6 +20,9 @@ class WorksModel extends Model {
             } else {
                 $whereArr['wid'] = '`wid` = ' . $condition['wid'];
             }
+        }
+        if (!empty($condition['title_key'])) {
+            $whereArr['title_key'] = '`title_key` = ' . $condition['title_key'];
         }
         if (!empty($condition['create_uid'])) {
             $whereArr['create_uid'] = '`create_uid` = ' . $condition['create_uid'];

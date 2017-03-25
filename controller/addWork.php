@@ -11,7 +11,7 @@ require_once '../module/WorksModel.php';
 require_once '../module/ScoresModel.php';
 
 class AddWork extends controllerBase {
-    protected $_fields = array('title', 'content', 'uid', 'type');
+    protected $_fields = array('title', 'content', 'type');
 
     public function __construct() {
         $this->run();
@@ -22,6 +22,11 @@ class AddWork extends controllerBase {
         if (empty($params['title']) || empty($params['content'])) {
             aj_output(ErrorMsg::ERROR_ARGUMENT);
         }
+        $worksModel = new WorksModel();
+        $res = $worksModel->getWorkInfos(array('title_key' => md5($params['title'])));
+        if (!empty($res)) {
+            aj_output(ErrorMsg::HAVEDTITLE);
+        }
         $addArr = array(
             'title'       => $params['title'],
             'content'     => $params['content'],
@@ -31,12 +36,11 @@ class AddWork extends controllerBase {
             'status'      => 1,
             'type'        => empty($params['type']) ? 0 : $params['type'],
         );
-        $worksModel = new WorksModel();
         $worksModel->startTransaction();
         $res = $worksModel->addWork($addArr);
         if (false === $res) {
             $worksModel->rollback();
-            aj_output(ErrorMsg::ERROR_SUBMIT);
+            aj_output(ErrorMsg::ERROR_SUBMIT, 'insert workModel error');
         }
         $scoreModel = new ScoreModel();
         $addArr = array(
@@ -47,7 +51,7 @@ class AddWork extends controllerBase {
         $res = $scoreModel->addScoreRecord($addArr);
         if (false === $res) {
             $worksModel->rollback();
-            aj_output(ErrorMsg::ERROR_SUBMIT);
+            aj_output(ErrorMsg::ERROR_SUBMIT, 'insert scoreModel error');
         }
         $worksModel->commit();
         aj_output(ErrorMsg::SUCCESS, '', $res);

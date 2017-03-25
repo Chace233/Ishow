@@ -11,6 +11,7 @@ require_once "../module/UserModel.php";
 
 class Login extends controllerBase {
     protected $_fields  = array('uname', 'passwd');
+    protected $_islogin = false;
 
     public function __construct() {
         $this->run();
@@ -29,7 +30,7 @@ class Login extends controllerBase {
         $this->_curUser = current($res);
         $this->_islogin = true;
         setcookie(ISHOW_COOKIE_NAME, $this->_curUser['uid'], time() + 3600 * 24 * 7);
-        aj_output(ErrorMsg::SUCCESS, '登录成功', $this->_curUser);
+        aj_output(ErrorMsg::SUCCESS, '登录成功', '');
     }
 }
 
