@@ -46,6 +46,7 @@ class CronSaiKr {
 			} else {
 				break;
 			}
+			break;
 		}
 		$competitionsModel = new CompetitionsModel();
 		foreach ($urls as $url) {
@@ -71,6 +72,9 @@ class CronSaiKr {
 				'`start_time`'  => empty($start_time) ? '' : $start_time,
 				'`end_time`'    => empty($end_time) ? '' : $end_time,
 			);
+			//$file = '/Users/chenlin15/Documents/out.txt';
+			//$str = "[title] : " . $addArr['`title`'] . "\n[content] : " . $addArr['`content`'] . "\n[create_time] : " . $addArr['`create_time`'] . "\n[download] : " . $addArr['`download`'] . "\n[start_time] : " . $addArr['`start_time`'] . "\n[end_time] : " . $addArr['`end_time`'];
+			//file_put_contents($file, $str);exit;
 			$res = $competitionsModel->addCompetitions($addArr);
 			if (false === $res) {
 				echo "\ninsert [" . $url . "] 错误!! \n";

@@ -3264,3 +3264,204 @@ font-size: 12px;
 .nav li:hover ul{
 	display: block;
 }	
+
+
+
+/*detail */
+
+	#detail_main {
+		padding: 4em 0 2em 0;
+	}
+
+		#detail_main .inner {
+			max-width: 60em;
+			margin: 0 auto;
+		}
+
+			#detail_main .inner header p {
+				font-size: 1em;
+				font-style: italic;
+				border-top: 1px solid rgba(144, 144, 144, 0.25);
+				border-bottom: 1px solid rgba(144, 144, 144, 0.25);
+				padding: .5em 0;
+			}
+
+		@media screen and (max-width: 980px) {
+
+			#detail_main {
+				padding: 3em 0 1em 0;
+			}
+
+				#detail_main .inner {
+					width: 90%;
+				}
+				#detail_main .response{
+					width: 90%;
+				}
+				#detail_main .comment-form{
+					width: 100%;
+				}
+
+		}
+
+				.image.fit {
+			display: block;
+			margin: 0 0 2em 0;
+			width: 100%;
+		}
+
+			.image.fit img {
+				width: 100%;
+			}
+			#detail_main h1{
+				font-size: 2.5em;
+			}
+			#detail_main .response{
+				max-width: 60em;
+				margin: 0 auto;
+			}
+			#detail_main .comment-form{
+				max-width: 60em;
+				margin: 0 auto;
+
+			}
+			.response h4 {
+		    color: #fa4b2a;
+		    font-size: 1.5em;
+		    font-weight: 600;
+		    margin-top: 1.5em;
+		    margin-bottom: 1em;
+		}
+		.comment-form{
+			margin-top:1.5em;
+		}
+		.media-left.response-text-left {
+    float: left;
+    width: 19%;
+}
+.response-text-right p {
+    color: #777;
+    font-size:0.9em;
+    margin: 0 0 1em;
+	line-height:1.9em;
+}
+.media-body.response-text-right ul li {
+    color: #F26649;
+    font-size: 0.9em;
+    display: inline-block;
+        font-weight: 400;
+}
+.media-body.response-text-right ul li a {
+    color: #000000;
+    font-size: 1em;
+    font-weight: 700;
+    display: block;
+    margin-top: 6px;
+    margin-left: 2em;
+}
+.media-body.response-text-right {
+    float: right;
+    width: 77%;
+    text-align: left;
+}
+.media-left.response-text-left h5 a {
+    color: #4A245E;
+    font-weight: 400;
+    line-height: 2em;
+}
+#detail .comment-form {
+    margin-top: 2em;
+	margin-bottom:2em;
+}
+.media-left.response-text-left a img {
+    border-radius:50%;
+	-o-border-radius:50%;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	-ms-border-radius:50%;
+}
+.media-body.response-text-right ul li a:hover {
+    text-decoration: none;
+    color: #f26649;
+}
+.response {
+    margin-top: 3em;
+}
+.comment-form textarea{
+	resize:none;
+	height:120px;	
+    width: 100%;
+}
+.comment-form h2{
+	margin-top: 2em;
+	margin-bottom: 1em;
+	color: #EA5A4B;
+}
+.comment-form textarea:hover{
+	border:1px solid #EA5A4B;
+}
+.comment-form input[type="submit"]{
+	font-family: 'bebasregular';
+	margin-top:4%;
+	cursor:pointer;
+	-webkit-appearance: none;
+	padding: 12px 30px;
+	border: 1px solid #E8603C;
+	background: #E8603C;
+	display: inline-block;
+	font-size: 1em;
+	text-transform: uppercase;
+	color: #ffffff;
+	-webkit-transition: 0.9s;
+	-moz-transition: 0.9s;
+	-o-transition: 0.9s;
+	transition: 0.9s;
+}
+.comment-form input[type="submit"]:hover{
+	background: #F2B19C;
+}
+
+span.glyphicon.glyphicon-comment:hover, span.glyphicon.glyphicon-eye-open:hover, span.glyphicon.glyphicon-thumbs-up:hover, a.span_link {
+    color: #000008;
+}
+span.glyphicon.glyphicon-comment, span.glyphicon.glyphicon-eye-open, span.glyphicon.glyphicon-thumbs-up {
+    font-size: 10px;
+    margin: 0 4px 0 20px;
+    color: #CCCBC6;
+}
+.soci {
+    float: right;
+    padding-top: 1em;
+}
+.soci li {
+    display: inline-block;
+}
+.soci ul li{
+	list-style-type:none;
+	display:inline-block;
+	margin:0 2px;
+	overflow:hidden;
+	height:32px;
+}
+.soci  ul li a{	
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    border: 1px solid #d2d1d1;
+}
+.soci  ul li a.fb{
+    background: url(../images/social.png) no-repeat -48px -7px;
+}
+.soci  ul li a.twit{
+    background: url(../images/social.png) no-repeat -7px -7px;
+}
+ /*-- agileits --*/
+.soci  ul li a.goog{
+    background: url(../images/social.png) no-repeat -88px -7px;
+}
+.soci  ul li a.pin{
+    background: url(../images/social.png) no-repeat -130px -7px;
+}
+.soci  ul li a.drib{
+    background: url(../images/social.png) no-repeat -171px -7px;
+}
