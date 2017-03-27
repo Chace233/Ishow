@@ -8,7 +8,7 @@
 
 header("Content-Type: text/html; charset=utf8");
 
-define('URI_HOST', '/Library/WebServer/Documents/myWeb');
+define('URI_HOST', dirname(dirname(__FILE__)));
 
 define('COMPETITION_STATUS_NOMAL', 1); //比赛状态正常
 define('COMPETITION_STATUS_DEL', 2); //比赛状态删除

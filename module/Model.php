@@ -147,7 +147,7 @@ class Model {
 		}
 		$addArr = $this->handleString($addArr);
 		$this->masterConn();
-		$sql = "INSERT INTO " . $this->_tbName . " (" . implode(' , ', array_flip($addArr)) . ") VALUES(" . implode(' , ', $addArr) . ")";
+		$sql = "INSERT INTO " . $this->_tbName . " (" . implode(' , ', array_keys($addArr)) . ") VALUES(" . implode(' , ', $addArr) . ")";
 		$res = $this->_mdb->query($sql);
 		if (false === $res) {
 			return false;

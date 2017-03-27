@@ -23,6 +23,10 @@ class ErrorMsg{
     const NOPASSWD          = 20014;//没有输入密码
     const NOUSER            = 20015;//没有该用户
     const HAVEDTITLE        = 20016;//title重复
+    const ERRUPLOAD         = 20017;//文件上传错误
+    const TOOBIG            = 20018;//文件太大
+    const ERRPIC            = 20019;//图片格式错误
+    const TOOLONG           = 20010;//输入的内容太长了
 
 
     static $msg = array(
@@ -43,6 +47,10 @@ class ErrorMsg{
         self::NOPASSWD         => '缺少密码',
         self::NOUSER           => '没有该用户',
         self::HAVEDTITLE       => '已经存在改title',
+        self::ERRUPLOAD        => '文件上传错误',
+        self::TOOBIG           => '文件太大了',
+        self::ERRPIC           => '图片格式错误',
+        self::TOOLONG          => '输入的内容太长了',
     );
 
 

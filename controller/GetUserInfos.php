@@ -9,9 +9,10 @@
 require_once 'global.php';
 require_once 'controllerBase.php';
 require_once '../module/UserModel.php';
+require_once '../module/ScoresModel.php';
 
 class getUserInfos extends controllerBase {
-    protected $_fields = array('uname');
+    protected $_fields = array('uname', 'feature');
 
     /**
      * getUserInfos constructor.
@@ -23,7 +24,19 @@ class getUserInfos extends controllerBase {
     public function run() {
         $params = $this->getParams();
         $userModel = new UserModel();
-        $userinfos = $userModel->getUserInfos(array('uname' => $params['uname']));
+        if (!isset($params['uname'])) {
+            $condition = array(
+                'uname' => $this->_curUser['uname'],
+            );
+        } else {
+            $condition = array(
+                'uname' => $params['uname'],
+            );
+        }
+        $condition['feature'] = isset($params['feature']) ? $params['feature'] : 1;
+        $userinfos = $userModel->getUserInfos($condition);
+        $scoresModel = new ScoreModel();
+        $userinfos[0]['scores'] = current($scoresModel->getUserScoresSum($userinfos[0]['uid']));
         aj_output(ErrorMsg::SUCCESS, '', $userinfos);
     }
 }

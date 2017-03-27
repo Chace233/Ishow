@@ -65,6 +65,13 @@ function base642Image() {
 }
 
 /**
+ * 过滤HTML标签
+ */
+function filterStripTags($content) {
+    return strip_tags($content);
+}
+
+/**
  * 获取头像地址
  */
 function getAvatarUrl($content) {
@@ -82,5 +89,16 @@ function aj_output ($errno, $errmsg = '', $result = '', $callback = '') {
         echo json_encode($output, JSON_UNESCAPED_UNICODE);
     }
     exit(0);
+}
+
+function isImage($tmp_name) {
+    if (file_exists($tmp_name)) {
+        $type = '.git|.jpeg|.jpg|.png|.bmp';
+        $info = getimagesize($tmp_name);
+        $ext = image_type_to_extension($info[2]);
+        return stripos($type, $ext);
+    } else {
+        return false;
+    }
 }
 
