@@ -17,7 +17,7 @@ class Model {
 	 * @param string $dbName 数据库名
 	 * @return object 数据库连接对象
 	 */
-	public static function getInstance($dbName = 'ishow') {
+	public static function getInstance($dbName = 'Ishow') {
 		global $conf;
 		if (empty(self::$_dbArray[$dbName]) || (self::$_dbArray[$dbName]->isConnected === false)) {
 			$db = new mysqli($conf['db']['host'], $conf['db']['user'], $conf['db']['password'],$dbName);

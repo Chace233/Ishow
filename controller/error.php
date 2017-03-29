@@ -28,6 +28,7 @@ class ErrorMsg{
     const ERRPIC            = 20019;//图片格式错误
     const TOOLONG           = 20020;//输入的内容太长了
     const NOWID             = 20021;//没有传入wid
+    const NOPERMISSION      = 20022;//没有权限操作
 
 
     static $msg = array(
@@ -53,6 +54,7 @@ class ErrorMsg{
         self::ERRPIC           => '图片格式错误',
         self::TOOLONG          => '输入的内容太长了',
         self::NOWID            => '缺少wid参数',
+        self::NOPERMISSION     => '无权限操作',
     );
 
 

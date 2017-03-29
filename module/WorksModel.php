@@ -8,7 +8,7 @@
 require_once 'Model.php';
 
 class WorksModel extends Model {
-    protected $_tbName = '`tblworks`';
+    protected $_tbName = '`tblWorks`';
 
     public function getWorkInfos($condition, $page = 1, $pagesize = 25) {
         $sql = 'SELECT `wid`, `title`, `content`, `create_time`, `create_uid`, `comment_num`, `collection_num`, `brower_num`, `status`, `vote_num`, `title_key`
