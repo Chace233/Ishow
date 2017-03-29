@@ -18,7 +18,7 @@ class AddCompetition extends controllerBase {
     public function run() {
         $params = $this->getParams();
         if ($this->_curUser['feature'] == 1) {
-            aj_output(ErrorMsg::)
+            aj_output(ErrorMsg::NOPERMISSION);
         }
         if (empty($params['title']) || empty($params['content'])) {
             aj_output(ErrorMsg::ERROR_ARGUMENT);

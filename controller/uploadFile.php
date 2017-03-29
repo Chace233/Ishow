@@ -22,28 +22,28 @@ class UploadFile extends controllerBase {
         $params = $this->getParams();
         $upload_file = $_FILES['file'];
         $file = $upload_file['tmp_name'];
-        $filename = substr($file, strrpos($file, '/')+1);
+        $filename = basename($_FILES['file']['name']);//substr($file, strrpos($file, '/')+1);
         if (!isset($upload_file) || $upload_file['error'] != 0) {
             aj_output(ErrorMsg::ERRUPLOAD);
         }
-        if ($params['type'] == 'pic' && !isImage($file)) {
+        if (isset($params['type']) && $params['type'] == 'pic' && !isImage($file)) {
             aj_output(ErrorMsg::ERRPIC);
         }
         if ($upload_file['size'] > $this->FileLimitSize()) {
             aj_output(ErrorMsg::TOOBIG);
         }
-        if (file_exists(URI_HOST . "/template/upload/" . $filename)) {
+        if (file_exists(URI_HOST . "/template/images/upload/" . $filename)) {
             $res = array(
-                'url' => 'http://101.200.59.83/images/upload/' . $filename,
+                'url' => 'http://101.200.59.83/template/images/upload/' . $filename,
             );
             aj_output(ErrorMsg::SUCCESS, '', $res);
         } else {
-            $res = move_uploaded_file($file, '/Users/chenlin15/Documents/' . $filename);
+            $res = move_uploaded_file($file, URI_HOST . "/template/images/upload/" . $filename);
             if (false === $res) {
                 aj_output(ErrorMsg::ERRUPLOAD);
             }
             $res = array(
-                'url' => 'http://101.200.59.83/images/' . $filename,
+                'url' => 'http://101.200.59.83/template/images/upload/' . $filename,
             );
             aj_output(ErrorMsg::SUCCESS, '' , $res);
         }
