@@ -26,7 +26,8 @@ class ErrorMsg{
     const ERRUPLOAD         = 20017;//文件上传错误
     const TOOBIG            = 20018;//文件太大
     const ERRPIC            = 20019;//图片格式错误
-    const TOOLONG           = 20010;//输入的内容太长了
+    const TOOLONG           = 20020;//输入的内容太长了
+    const NOWID             = 20021;//没有传入wid
 
 
     static $msg = array(
@@ -51,6 +52,7 @@ class ErrorMsg{
         self::TOOBIG           => '文件太大了',
         self::ERRPIC           => '图片格式错误',
         self::TOOLONG          => '输入的内容太长了',
+        self::NOWID            => '缺少wid参数',
     );
 
 

@@ -46,6 +46,33 @@ class UserModel extends Model {
         return $res;
     }
 
+    public  function getUserTotal($condition) {
+        $sql = "SELECT SUM(`uid`)
+                FROM " . $this->_tbName;
+        $whereArr = array();
+        if (!empty($condition['uid'])) {
+            if (is_array($condition['uid'])) {
+                $whereArr[] = "`uid` IN (" . implode(', ', $condition['uid']) . ")";
+            } else {
+                $whereArr[] = "`uid` = " . $condition['uid'];
+            }
+        }
+        if (!empty($condition['uname'])) {
+            $whereArr[] = "`uname` = '" . $condition['uname'] . "'";
+        }
+        if (!empty($condition['feature'])) {
+            $whereArr[] = "`feature` = " . $condition['feature'];
+        }
+        if (!empty($condition['islogin'])) {
+            $whereArr[] = "`islogin` = " . $condition['islogin'];
+        }
+        if (!empty($whereArr)) {
+            $sql .= " WHERE " . implode(' AND ', $whereArr);
+        }
+        $res = $this->Query($sql);
+        return current($res);
+    }
+
     public function addUser($addArr) {
         if (empty($addArr)) {
             return false;
