@@ -8,7 +8,7 @@
 require_once "Model.php";
 
 class CommentModel extends Model {
-    protected $_tbName = '`tblComment`';
+    protected $_tbName = '`tblcomment`';
     protected $_tbUser = '`tblUser`';
 
     /**

@@ -8,7 +8,7 @@
 require_once "Model.php";
 
 class CollectionsModel extends Model {
-    protected  $_tbName = '`tblCollections`';
+    protected  $_tbName = '`tblcollections`';
 
     /**
      * CollectionsModel constructor.
