@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 header('Content-type: text/html; charset=utf-8');
 set_time_limit(0);
 
-include '/Library/WebServer/Documents/myWeb/controller/global.php';
+include '../controller/global.php';
 include URI_HOST . '/crawler/http.php';
 include URI_HOST . '/module/CompetitionsModel.php';
 

@@ -31,3 +31,5 @@ class GetComments extends controllerBase {
         aj_output(ErrorMsg::SUCCESS, '', $res);
     }
 }
+
+new GetComments();
