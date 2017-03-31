@@ -1,12 +1,37 @@
 <html>
 <body>
-
-<form action="../controller/uploadFile.php" method="post"
-      enctype="multipart/form-data">
-    <label for="file">Filename:</label>
-    <input type="file" name="file" id="file" />
-    <br />
-    <input type="submit" name="submit" value="Submit" />
+<script>
+function sendRequest(data, url="../controller/GetUserInfos.php", method = "POST") {
+    if (url == "") {
+   	alter("未输入url");
+    }
+    $.ajax({
+        type: method,
+	url: url,
+	data: {"uname" : data},
+	cache: false,
+	async: false,
+	dataType: "json",
+	success: function(json, textStatus, jqXHR) {
+	    if (0 == json.code) {
+		console.info(json);
+		//document.getElementById("txtHit").innerHTML=json.data.uname;					    	
+	    } else {
+		alter(json.msg);
+	    }
+	    return true;
+	},
+	error:function (XMLHttpRequest, textStatus, errorThrow) {
+	    alter(json.msg);
+	    return false; 
+	}
+    });
+}
+</script>
+<form>
+Name:<input type="text" id="name" onkeyup="sendRequest(this.value)">
 </form>
+<p>结果：<br><span id="txtHit"></span></p>
+<script type="text/javascript" src="js/jquery.js"></script>
 </body>
 </html>
