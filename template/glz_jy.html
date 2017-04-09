@@ -2,13 +2,15 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>青春川大 | 团委介绍 </title>
+<title>IShow大学生项目园</title>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
 <link rel="stylesheet" href="css/amazeui.widgets.min.css">
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+
 <script type="text/javascript" src="js/jquery.js"></script>
+<script src="js/jquery-2.1.4.min.js"></script>  
 <!-- start slider -->
 	<link href="css/camera.css" rel="stylesheet" type="text/css" media="all" />
 	
@@ -39,6 +41,24 @@
   	height: 36px;
   	}
 	</style>
+	<style>
+    .up-pic{
+      background:url(images/icon9.png) center center no-repeat;
+      background-size:100% auto;
+    }
+    .up-vedio{
+      background:url(images/icon10.png) center center no-repeat;
+      background-size:100% auto;
+    }
+    .delete{
+      background:url(images/icon11.png) center center no-repeat;
+      background-size:100% auto;
+    }
+    .add-picb{
+      background:#fff url(images/icon12.png) center center no-repeat;
+      background-size:50% auto;
+    }
+    </style>
 <!-- end slider -->
 </head>
 <body>
@@ -88,7 +108,7 @@
 	<!--start-wrap-->
 	<div class="wrap">
 		<div class="title">
-			<div class="float-lt"><h1>个人中心</h1></div>
+			<div class="float-lt"><h1>管理中心</h1></div>
 		    <form class="form-inline">
 		    	<div class="form-group float-rt">
 			   		<input type="button" class="btn-search" value="搜索">
@@ -104,37 +124,43 @@
 </div> 
 <!--about-content-->
 <div class="wrap">
-<div class="content">
+   <div class="content">
 		<!--about-grids-->
 		<div class="main-grid">
-					<div class="grid-left">
+			<div class="grid-left">
 			<!-- start slider -->
 				<div class="contact">
 					<div class="company_address">
 				   </div>
-					<div class="contact-form">
-					    <form>
-					    	<div>
-						    	<span><input type="text" class="textbox right" placeholder="标题"></span>
-						    </div>
-						     <div class="clear"></div>
-						    <div>
-						    	<span><input type="text" class="textbox right" placeholder="标签" ></span>
-						    </div>
-						    <div class="clear"></div>
-						    <div>
-						    	<span><textarea rows="2" cols="70" placeholder="内容"></textarea></span>
-						    </div>
-						   <div>
-						   		<span><input type="submit" class="" placeholder="提交"></span>
-						  </div>
-					    </form>
+					<div class="fb-wrap">
+				     <form name="">
+				      <div class="input-box">
+				        <input type="text" name="" placeholder="标题：4-25个字">
+				      </div>
+				      <div class="input-box">
+				        <input type="text" name="" placeholder="标签：4-8个字">
+				      </div>
+				      <div class="textare-box">
+				        <textarea name="" placeholder="内容：10-1000个字" rows="8"></textarea>
+				      </div>
+				      <div class="up-bx">
+				        <span class="up-pic">
+				          <input type="file">
+				        </span>
+				        <span class="up-vedio">
+				          <input type="file">
+				        </span>
+
+				        <div class="serch">发表</div>
+				        <div class="qx">取消</div>
+				      </div>
+				     </form>
 				    </div>
 				    <div class="clear"></div>
 				</div>
 			</div>
 			<!--end blog-left-->
-		<!--grid-right-->
+			<!--grid-right-->
 			<div class="grid-right">
 				<div class="side-bar">
 				<div class="grid-right-headings">
@@ -143,8 +169,7 @@
 					<div class="clear"> </div>
 				</div>
 				<ul class="seach-links">
-				<li><a href="glz_gxym.html">更新界面</a></li>
-				<li><a href="glz_xmgl.html" >项目管理</a></li>
+				<li><a href="glz_gxym.html">更新头图</a></li>
 				</ul>
 				<div class="grid-right-headings">
 					<h2><a href="glz_jy.html">资料发布</a></h2>
@@ -152,9 +177,9 @@
 						<div class="clear"> </div>
 				</div>
 				<ul class="seach-links">
-				<li ><a href="glz_jy.html">获奖者经验</a></li>
+				<li class="active"><a href="glz_jy.html">获奖者经验</a></li>
 				<li><a href="glz_wd.html">文档模版</a></li>
-				<li class="active"><a href="glz_ppt.html">ppt模版</a></li>
+				<li ><a href="glz_ppt.html">ppt模版</a></li>
 				</ul>
 				<div class="grid-right-headings">
 					<h2><a href="#">反馈意见</a></h2>
@@ -163,7 +188,7 @@
 				</div>
 				</div>
 			</div>
-			<!--end grid-right-->
+			 <!--end grid-right-->
 			<div class="clear"> </div>
 		</div>
 		<!--end about-grids-->
@@ -220,7 +245,7 @@
 <div class="copy-right">
 	<div class="wrap">
 		<div class="copy-right-left">
-			<p>Copyright &copy; 2014.<a href="haj.fyscu.com">HWJ</a> All rights reserved.</p>
+			<p>Copyright &copy; 2017.<a href="haj.fyscu.com">ISHOW</a> All rights reserved.</p>
 		</div>
 	</div>
 </div>

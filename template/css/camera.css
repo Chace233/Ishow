@@ -1180,3 +1180,11 @@ line-height: 1.3em;
 padding-bottom: 10px;
 }
 }
+.content_xq p{
+		font-family: "微软雅黑", "黑体", "新宋体", "宋体";
+	color: #525252;
+	font-size: 0.85em;
+	padding: 22px 0px;
+	font-weight: 100;
+	line-height: 1.9em;
+}
