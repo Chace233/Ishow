@@ -5,9 +5,9 @@ error_reporting(E_ALL);
 header('Content-type: text/html; charset=utf-8');
 set_time_limit(0);
 
-include '../controller/global.php';
-include URI_HOST . '/crawler/http.php';
-include URI_HOST . '/module/CompetitionsModel.php';
+require_once '../controller/global.php';
+require_once URI_HOST . '/crawler/http.php';
+require_once URI_HOST . '/module/CompetitionsModel.php';
 
 
 class CronSaiKr {
@@ -46,7 +46,6 @@ class CronSaiKr {
 			} else {
 				break;
 			}
-			break;
 		}
 		$competitionsModel = new CompetitionsModel();
 		foreach ($urls as $url) {

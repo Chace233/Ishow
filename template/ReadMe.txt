@@ -35,3 +35,10 @@ stu_XXX系列 学生个人中心系列
 
 主页—2017全国大学生英语竞赛 介绍详情 single_yyjs.html
 主页-北斗智能学生卡综合解决方案 介绍详情 single_xsk.html
+
+school_gffb.html 学校官方发布
+school_zhgl.html 学校账号管理
+stu_grsc.html 学生个人收藏
+stu_grzl.html 学生个人资料
+stu_grzy.html 学生个人中心
+stu_zhgl.html 学生账号管理
