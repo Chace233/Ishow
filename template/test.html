@@ -1,0 +1,50 @@
+<html>
+<script type="text/javascript" src="js/jquery.js"></script>
+<link rel="stylesheet" href="css/reveal.css">
+<script src="http://www.jq22.com/jquery/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="js/jquery.reveal.js"></script>
+
+<body>
+<script>
+    function sendRequest(data, url="../controller/GetUserInfos.php", method = "POST") {
+            if (url == "") {
+               	window.alter("未输入url");
+            }
+            $.ajax({
+                type: method,
+                url: url,
+                data: {"uname" : data},
+                cache: false,
+                async: false,
+                dataType: "json",
+                success: function(json, textStatus, jqXHR) {
+                if (0 == json.code) {
+                    window.alter(json);
+                    //document.getElementById("txtHit").innerHTML=json.data.uname;
+                } else {
+                    window.alter(json.msg);
+                }
+                    return true;
+            	},
+        	    error:function (XMLHttpRequest, textStatus, errorThrow) {
+                    window.alter(errorThrow);
+            	    return false;
+            	}
+            });
+    }
+    $(document).ready(function() {
+        $('#button').click(function() {
+            windowAlert
+        });
+    });
+</script>
+<form>
+    Name:<input type="text" id="name" onkeyup="sendRequest(this.value)">
+    <input type="button" data-reveal-id="button" value="submit">
+    <a href="#" class="big-link" data-reveal-id="myModal">
+        jquery1
+    </a>
+</form>
+    <p>result:<br><span id="txtHit"></span></p>
+</body>
+</html>

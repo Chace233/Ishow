@@ -46,23 +46,19 @@
 								<div class="w3table-topimg">
 									<img src="images/img1.jpg">
 								</div>
-								<form action="#" method="post"> 
-									<input type="text" name="Username" placeholder="昵称" required=""/>
-									<input type="Password" name="Password" placeholder="密码" required=""/>  	
-									<input type="submit" class="btn" value="登录"> 
-								</form>  
+									<input id="uname1" type="text" name="uname" placeholder="昵称" required=""/>
+									<input id="passwd1" type="Password" name="passwd" placeholder="密码" required=""/>
+									<input id = "click1" type="submit" class="btn" value="登录">
 							</div>
 						</div>
 					</div>
 					<div class="form-item sign-up"><!-- sign-up form-->
 						<div class="w3table w3-agileits">
-							<div class="w3table-cell">   
-								<form action="#" method="post">  
-									<input type="text" name="fullName" placeholder="昵称" required=""/>
-									<input type="Password" name="Password" placeholder="密码" required=""/> 
-									<input type="email" name="email" placeholder="邮件" required=""/>	
-									<input type="submit" class="btn" value="注册"> 
-								</form>
+							<div class="w3table-cell">
+								<input id="uname2" type="text" name="uname" placeholder="昵称" required=""/>
+								<input id="passwd2" type="Password" name="passwd" placeholder="密码" required=""/>
+								<input id="email" type="email" name="email" placeholder="邮件" required=""/>
+								<input id="click2" type="submit" class="btn" value="注册">
 							</div>
 						</div>
 					</div>
@@ -73,13 +69,74 @@
 	<!-- //main -->
 
 	<!-- js -->  
-	<script  src=" js/jquery.min.js"></script> 
+	<script  src=" js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/ishow.ajax.js"></script>
 	<script>
 		$(".info-w3lsitem .btn").click(function() {
 			  $(".main-agileinfo").toggleClass("log-in");
 			});
 			$(".container-form .btn").click(function() {
 			  $(".main-agileinfo").addClass("active");
+		});
+		$(document).ready(function(){
+			$("#click1").click(function() {
+				var uname = document.getElementById("uname1").value;
+				var passwd = document.getElementById("passwd1").value;
+				if (uname != null && passwd != null) {
+					ishowAjax({
+						type: "post",
+						url: "../controller/login.php",
+						data: {'uname': uname, 'passwd': passwd},
+						cache: false,
+						async: false,
+						dataType: "json",
+						success: function(json, status, jsXHR) {
+							if (0 == json.code) {
+								window.location.href = "index.html";
+							} else {
+								alert(json.msg);
+							}
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrow) {
+							console.info(errorThrow);
+							return false;
+						}
+					})
+				}
+			});
+		});
+		$(document).ready(function(){
+			$("#click2").click(function() {
+				var uname = document.getElementById("uname2").value;
+				var passwd = document.getElementById("passwd2").value;
+				var email = document.getElementById("email").value;
+				if (uname != null && passwd != null) {
+					ishowAjax({
+						type: "post",
+						url: "../controller/register.php",
+						data: {'uname': uname, 'passwd': passwd, 'email': email},
+						cache: false,
+						async: false,
+						dataType: "json",
+						success: function(json, status, jsXHR) {
+							if (0 == json.code) {
+								var result = confirm('注册成功！');
+								if(result){
+									window.location.href = "index.html";
+								}else{
+									window.location.href = "index.html";
+								}
+							} else {
+								alert(json.msg);
+							}
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrow) {
+							console.info(errorThrow);
+							return false;
+						}
+					})
+				}
+			});
 		});
 	</script>
 	<!-- //js --> 

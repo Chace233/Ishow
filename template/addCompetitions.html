@@ -7,18 +7,18 @@
 
     <link rel="stylesheet" href="css/amazeui.widgets.min.css">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script type="text/javascript" src="js/jquery.js"></script>
     <!-- start slider -->
     <link href="css/camera.css" rel="stylesheet" type="text/css" media="all" />
 
-    <script src="js/jquery.min.js"></script>
-    <script type='text/javascript' src="js/jquery.mobile.customized.min.js"></script>
+    <script src="js/jquery.js"></script>
+   <!-- <script type='text/javascript' src="js/jquery.mobile.customized.min.js"></script>
     <script type='text/javascript' src="js/jquery.easing.1.3.js"></script>
     <script type='text/javascript' src="js/camera.min.js"></script>
     <script src="js/zepto.min.js"></script>
     <script src="js/amazeui.min.js"></script>
     <script src="js/handlebars.min.js"></script>
-    <script src="js/amazeui.widgets.helper.min.js"></script>
+    <script src="js/amazeui.widgets.helper.min.js"></script>-->
+    <script src="js/ishow.ajax.js"></script>
     <style type="text/css">
         .btn-search{
             margin-left: 0px;
@@ -27,7 +27,48 @@
             height: 36px;
         }
     </style>
-    <!-- end slider -->
+    <script type="text/javascript">
+        /*$(document).ready(function(){
+            $.get("../controller/GetUserInfos.php", function(result, status){
+                if (0 != result.code) {
+                    window.alter(result);
+                } else {
+                    var data = result.data;
+                    window.alter(data);
+                }
+            });
+        });*/
+
+        $(document).ready(function($) {
+            $('#myclick').click(function() {
+                var title = document.getElementById("titleValue").value;
+                var content = document.getElementById("contentValue").value;
+                var type = document.getElementById("typeValue").value;
+                var start_time = Date.parse(document.getElementById("start_time").value) / 1000;
+                var end_time = Date.parse(document.getElementById("end_time").value) / 1000;
+                ishowAjax({
+                    type: "post",
+                    url: "../controller/addCompetition.php",
+                    data: {'title':title, 'content':content, 'type': type, 'start_time': start_time, 'end_time': end_time},
+                    cache: false,
+                    async: false,
+                    dataType: "json",
+                    success: function(json, textStatus, jsXHR) {
+                        if (0 == json.code) {
+                            alert("提交成功");
+                        } else {
+                            alert(json.msg);
+                        }
+                        return true;
+                    },
+                    error:function (XMLHttpRequest, textStatus, errorThrow) {
+                        console.info(errorThrow);
+                        return false;
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <!--star wrap-->
@@ -52,19 +93,6 @@
     </div>
     <!--end wrap-->
 </div>
-<script type="application/javascript">
-   /* $(document).ready(function(){
-        $.get("../controller/GetUserInfos.php", function(result, status){
-            if (0 != result.code) {
-                alter(result.msg);
-            } else {
-                var data = result.data;
-                console(data);
-            }
-        });
-    });
-*/
-</script>
 
 <!--about-content-->
 <div class="wrap">
@@ -83,22 +111,27 @@
                             </div>
                             <div class="clear"></div>
                             <div>
-                                <input id="typeValue" type="text" class="textbox right" placeholder="类型" >
+                                <select id="typeValue" class="textbox right">
+                                    <option value="11">校级比赛</option>
+                                    <option value="12">省级比赛</option>
+                                    <option value="13">国家级比赛</option>
+                                </select>
                             </div>
+                            <br>
                             <div class="clear"></div>
                             <div>
                                 <textarea id="contentValue" rows="2" cols="70" placeholder="内容"></textarea>
                             </div>
                             <br>
                             <div >
-                                开始时间：<input type="date" name="start_time">
+                                开始时间：<input id="start_time" type="date" name="start_time">
                             </div>
                             <br>
                             <div>
-                                结束时间：<input type="date" name="end_time">
+                                结束时间：<input id="end_time" type="date" name="end_time">
                             </div>
                             <div>
-                                <input id="click"  type="submit"  placeholder="提交" onclick="sendRequest()">
+                                <input id="myclick"  type="submit"  placeholder="提交">
                             </div>
 
                     </div>
@@ -116,54 +149,5 @@
 <!--end footer-->
 <div class="include" file="ender.html"></div>
 <script src="js/include.js"></script>
-<script typ="application/javascript">
-    function sendRequest( url="../controller/GetUserInfos.php", method="post") {
-        var title = document.getElementById("titleValue").value;
-        var content = document.getElementById("contentValue").value;
-        if ()
-        $.ajax({
-            type: "post",
-            url: url,
-            data: {'title': title, 'content': content},
-            cache: false,
-            async: false,
-            dataType: "json",
-            success: function(json, textStatus, jsXHR) {
-                if (0 == json.code) {
-                    console.info(json);
-                } else {
-                    window.alter(json.msg);
-                }
-                return true;
-            },
-            error:function (XMLHttpRequest, textStatus, errorThrow) {
-                console.info(errorThrow);
-                return false;
-            }
-        });
-    }
-    /*$(document).ready(function(){
-        $("click").click(function(){
-            alter('hahaha');
-            var title = document.getElementById('title').value;
-            var content = document.getElementById('content').value;
-            $.ajax({
-                type: "post",
-                url: "http://101.200.59.83/controller/addCompetition.php",
-                data: {'title': title, 'content': content},
-                cache: false,
-                async: false,
-                dataType: "json",
-                success: function(json, textStatus, jsXHR) {
-                    if (0 == json.code) {
-                        console.info(json);
-                    } else {
-                        alter(json.msg);
-                    }
-                }
-            });
-        })
-    });*/
-</script>
 </body>
 </html>

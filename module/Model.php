@@ -19,7 +19,7 @@ class Model {
 	 */
 	public static function getInstance($dbName = 'Ishow') {
 		global $conf;
-		if (empty(self::$_dbArray[$dbName]) || (self::$_dbArray[$dbName]->isConnected === false)) {
+		if (empty(self::$_dbArray[$dbName]) || (@self::$_dbArray[$dbName]->isConnected === false)) {
 			$db = new mysqli($conf['db']['host'], $conf['db']['user'], $conf['db']['password'],$dbName);
 			self::$_dbArray[$dbName] = $db;
 		}
