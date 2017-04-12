@@ -11,13 +11,13 @@
     <link href="css/camera.css" rel="stylesheet" type="text/css" media="all" />
 
     <script src="js/jquery.js"></script>
-   <!-- <script type='text/javascript' src="js/jquery.mobile.customized.min.js"></script>
-    <script type='text/javascript' src="js/jquery.easing.1.3.js"></script>
-    <script type='text/javascript' src="js/camera.min.js"></script>
-    <script src="js/zepto.min.js"></script>
-    <script src="js/amazeui.min.js"></script>
-    <script src="js/handlebars.min.js"></script>
-    <script src="js/amazeui.widgets.helper.min.js"></script>-->
+    <!-- <script type='text/javascript' src="js/jquery.mobile.customized.min.js"></script>
+     <script type='text/javascript' src="js/jquery.easing.1.3.js"></script>
+     <script type='text/javascript' src="js/camera.min.js"></script>
+     <script src="js/zepto.min.js"></script>
+     <script src="js/amazeui.min.js"></script>
+     <script src="js/handlebars.min.js"></script>
+     <script src="js/amazeui.widgets.helper.min.js"></script>-->
     <script src="js/ishow.ajax.js"></script>
     <style type="text/css">
         .btn-search{
@@ -29,32 +29,38 @@
     </style>
     <script type="text/javascript">
         /*$(document).ready(function(){
-            $.get("../controller/GetUserInfos.php", function(result, status){
-                if (0 != result.code) {
-                    window.alter(result);
-                } else {
-                    var data = result.data;
-                    window.alter(data);
-                }
-            });
-        });*/
+         $.get("../controller/GetUserInfos.php", function(result, status){
+         if (0 != result.code) {
+         window.alter(result);
+         } else {
+         var data = result.data;
+         window.alter(data);
+         }
+         });
+         });*/
 
         $(document).ready(function($) {
             $('#myclick').click(function() {
                 var title = document.getElementById("titleValue").value;
+                if (title == null || title == undefined || title == '') {
+                    alert("标题不能为空");
+                    return false;
+                }
                 var content = document.getElementById("contentValue").value;
+                if (content == undefined || content == null || content == '') {
+                    alert("内容不能为空");
+                    return false;
+                }
                 var type = document.getElementById("typeValue").value;
-                var start_time = Date.parse(document.getElementById("start_time").value) / 1000;
-                var end_time = Date.parse(document.getElementById("end_time").value) / 1000;
                 ishowAjax({
                     type: "post",
-                    url: "../controller/addCompetition.php",
-                    data: {'title':title, 'content':content, 'type': type, 'start_time': start_time, 'end_time': end_time},
+                    url: "../controller/addWork.php",
+                    data: {'title':title, 'content':content, 'type': type},
                     cache: false,
                     async: false,
                     dataType: "json",
-                    success: function(result, textStatus, jsXHR) {
-                        var json = JSON.parse(result);
+                    success: function(json, textStatus, jsXHR) {
+                        console.info(json.code);
                         if (0 == json.code) {
                             alert("提交成功");
                         } else {
@@ -80,7 +86,7 @@
     <!--start-wrap-->
     <div class="wrap">
         <div class="title">
-            <div class="float-lt"><h1>发布比赛信息</h1></div>
+            <div class="float-lt"><h1>添加作品</h1></div>
             <form class="form-inline">
                 <div class="form-group float-rt">
                     <input type="button" class="btn-search" value="搜索">
@@ -107,33 +113,28 @@
                     </div>
                     <div class="contact-form">
 
-                            <div>
-                                <input id="titleValue" type="text" class="textbox right" placeholder="标题">
-                            </div>
-                            <div class="clear"></div>
-                            <div>
-                                <select id="typeValue" class="textbox right">
-                                    <option value="11">校级比赛</option>
-                                    <option value="12">省级比赛</option>
-                                    <option value="13">国家级比赛</option>
-                                </select>
-                            </div>
-                            <br>
-                            <div class="clear"></div>
-                            <div>
-                                <textarea id="contentValue" rows="2" cols="70" placeholder="内容"></textarea>
-                            </div>
-                            <br>
-                            <div >
-                                开始时间：<input id="start_time" type="date" name="start_time">
-                            </div>
-                            <br>
-                            <div>
-                                结束时间：<input id="end_time" type="date" name="end_time">
-                            </div>
-                            <div>
-                                <input id="myclick"  type="submit"  placeholder="提交">
-                            </div>
+                        <div>
+                            <input id="titleValue" type="text" class="textbox right" placeholder="标题">
+                        </div>
+                        <div class="clear"></div>
+                        <div>
+                            <select id="typeValue" class="textbox right">
+                                <option value="1">工科类</option>
+                                <option value="2">理科类</option>
+                                <option value="3">商科类</option>
+                                <option value="4">文科类</option>
+                                <option value="0">综合</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="clear"></div>
+                        <div>
+                            <textarea id="contentValue" rows="10" cols="100" placeholder="内容"></textarea>
+                        </div>
+                        <br>
+                        <div>
+                            <input id="myclick"  type="submit"  placeholder="提交">
+                        </div>
 
                     </div>
                     <div class="clear"></div>

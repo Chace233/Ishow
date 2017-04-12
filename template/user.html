@@ -1,11 +1,218 @@
 <html>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/include.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        var uname = GetQueryString("uname");
-        console.info(uname);
-    });
-</script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="陈林_wsfd,">
+    <meta name="keywords" content="陈林_wsfd,,开源中国博客">
+    <meta name="description" itemprop="description" content="博客,陈林_wsfd,蜗牛慢慢爬">
+    <title>写博客 - 陈林_wsfd</title>
+    <link rel="alternate" type="application/rss+xml" title="写博客 - 陈林_wsfd - 开源中国社区" href="https://my.oschina.net/u/2544978/rss">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?t=1451964198000">
+    <link rel="stylesheet" type="text/css" href="/build/oschina/components/stylesheets/leeui_layout.css?t=1483632832000">
+    <meta itemprop="name" content="写博客 - 陈林_wsfd - 开源中国社区">
+    <meta itemprop="image" content="https://www.oschina.net/img/logo_s2.png">
+
+
+    <link type="text/css" href="/dist/www/css/icon-svg.min.css?t=1491732257000" rel="stylesheet">
+    <link type="text/css" href="/dist/www/css/blog-edit.min.css?t=1491732257000" rel="stylesheet">
+
+    <style>.cke{visibility:hidden;}</style><script type="text/javascript" src="https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/config.js?t=G2VC20161114"></script><script type="text/javascript" src="https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/skins/moono-lisa/skin.js?t=G2VC20161114"></script><link rel="stylesheet" type="text/css" href="https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/skins/moono-lisa/editor.css?t=G2VC20161114"><script type="text/javascript" src="https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/lang/zh-cn.js?t=G2VC20161114"></script><script type="text/javascript" src="https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/styles.js?t=G2VC20161114"></script><script type="text/javascript" src="https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/flash/plugin.js?t=G2VC20161114"></script><script type="text/javascript" src="https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/video/plugin.js?t=G2VC20161114"></script><script type="text/javascript" src="https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/flash/lang/zh-cn.js?t=G2VC20161114"></script><script type="text/javascript" src="https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+</head>
+<div class="blog-edit">
+    <form id="blog-form" method="post">
+        <input type="hidden" name="draft" value="0">
+        <input type="hidden" name="user_code" value="WIbGVQoYpWphltZG03Sh5sgMN3mxhY5uLMJ5qA8C">
+        <input type="hidden" name="id" value="">
+        <div class="edit-fixed edit-fixed-header">
+            <!-- 编辑页头部 -->
+            <div class="edit-header clearfix">
+                <div class="container">
+                    <div class="layout-right edit-catalog">
+                        <div class="select-box">
+                            分类：
+                            <input class="drop-input" id="self_sort" type="hidden" name="catalog" value="3413489">
+                            <span class="select-show over-hide" data-value="3413489">工作日志</span>
+                            <i class="icon-tri select-icon"></i>
+                            <div class="dropdown" style="display: none;">
+                                <div class="sort-items">
+                                    <div class="select-opt" data-value="3413489">
+                                        <span class="opt-name over-hide">工作日志</span>
+                                    </div>
+                                    <div class="select-opt" data-value="3413490">
+                                        <span class="opt-name over-hide">日常记录</span>
+                                    </div>
+                                    <div class="select-opt" data-value="3413491">
+                                        <span class="opt-name over-hide">转贴的文章</span>
+                                    </div>
+                                </div>
+                                <div class="add-sort">
+                                    <input class="input-add-sort" type="text" placeholder="新的分类/回车确认" maxlength="10">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="edit-left">
+                        <input class="title" id="title" type="text" name="title" placeholder="无标题博客" value="" maxlength="100">
+                        <div>
+                            <textarea class="abstract" name="abstracts" placeholder="无摘要" value="" maxlength="300"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 编辑器编辑框部分 -->
+        <div class="edit-body">
+            <div class="container">
+                <!-- 编辑器图标部分 -->
+                <div class="edit-toolbar clearfix">
+                    <div class="container">
+                        <div class="layout-right editor-toggle" style="left: auto;">
+                            <div class="select-box select-editor">
+                                <input type="hidden" name="content_type" id="editor_value" class="select-input" value="4">
+                                <i class="icon-tri select-icon"></i>
+                                <span class="select-show">可视化编辑器</span>
+                                <div class="dropdown">
+                                    <div class="select-opt" data-value="3" data-id="mdeditor">Markdown</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="edit-box">
+                    <textarea name="content" class="editor-content" id="ckeditor" style="visibility: hidden; display: none;">  </textarea><div id="cke_ckeditor" class="cke_1 cke cke_reset cke_chrome cke_editor_ckeditor cke_ltr cke_browser_webkit" dir="ltr" lang="zh-cn" role="application" aria-labelledby="cke_ckeditor_arialbl"><span id="cke_ckeditor_arialbl" class="cke_voice_label">所见即所得编辑器, ckeditor</span><div class="cke_inner cke_reset" role="presentation"><span id="cke_1_top" class="cke_top cke_reset_all" role="presentation" style="height: auto; user-select: none;"><span id="cke_10" class="cke_voice_label">工具栏</span><span id="cke_1_toolbox" class="cke_toolbox" role="group" aria-labelledby="cke_10" onmousedown="return false;"><span id="cke_12" class="cke_toolbar" role="toolbar"><span class="cke_toolbar_start"></span><span class="cke_toolgroup" role="presentation"><a id="cke_13" class="cke_button cke_button__link cke_button_off" href="javascript:void('插入/编辑超链接')" title="插入/编辑超链接" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_13_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(1,event);" onfocus="return CKEDITOR.tools.callFunction(2,event);" onclick="CKEDITOR.tools.callFunction(3,this);return false;"><span class="cke_button_icon cke_button__link_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -504px;background-size:auto;">&nbsp;</span><span id="cke_13_label" class="cke_button_label cke_button__link_label" aria-hidden="false">插入/编辑超链接</span></a><a id="cke_14" class="cke_button cke_button__unlink cke_button_disabled " href="javascript:void('取消超链接')" title="取消超链接" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_14_label" aria-haspopup="false" aria-disabled="true" onkeydown="return CKEDITOR.tools.callFunction(4,event);" onfocus="return CKEDITOR.tools.callFunction(5,event);" onclick="CKEDITOR.tools.callFunction(6,this);return false;"><span class="cke_button_icon cke_button__unlink_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -528px;background-size:auto;">&nbsp;</span><span id="cke_14_label" class="cke_button_label cke_button__unlink_label" aria-hidden="false">取消超链接</span></a><span class="cke_toolbar_separator" role="separator"></span><a id="cke_15" class="cke_button cke_button__textcolor cke_button_off " href="javascript:void('文本颜色')" title="文本颜色" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_15_label" aria-haspopup="true" onkeydown="return CKEDITOR.tools.callFunction(7,event);" onfocus="return CKEDITOR.tools.callFunction(8,event);" onclick="CKEDITOR.tools.callFunction(9,this);return false;"><span class="cke_button_icon cke_button__textcolor_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -888px;background-size:auto;">&nbsp;</span><span id="cke_15_label" class="cke_button_label cke_button__textcolor_label" aria-hidden="false">文本颜色</span><span class="cke_button_arrow"></span></a><a id="cke_16" class="cke_button cke_button__bgcolor cke_button_off " href="javascript:void('背景颜色')" title="背景颜色" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_16_label" aria-haspopup="true" onkeydown="return CKEDITOR.tools.callFunction(10,event);" onfocus="return CKEDITOR.tools.callFunction(11,event);" onclick="CKEDITOR.tools.callFunction(12,this);return false;"><span class="cke_button_icon cke_button__bgcolor_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -864px;background-size:auto;">&nbsp;</span><span id="cke_16_label" class="cke_button_label cke_button__bgcolor_label" aria-hidden="false">背景颜色</span><span class="cke_button_arrow"></span></a><span class="cke_toolbar_separator" role="separator"></span><a id="cke_17" class="cke_button cke_button__image cke_button_off" href="javascript:void('图像')" title="图像" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_17_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(13,event);" onfocus="return CKEDITOR.tools.callFunction(14,event);" onclick="CKEDITOR.tools.callFunction(15,this);return false;"><span class="cke_button_icon cke_button__image_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -336px;background-size:auto;">&nbsp;</span><span id="cke_17_label" class="cke_button_label cke_button__image_label" aria-hidden="false">图像</span></a><a id="cke_18" class="cke_button cke_button__flash cke_button_off" href="javascript:void('Flash')" title="Flash" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_18_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(16,event);" onfocus="return CKEDITOR.tools.callFunction(17,event);" onclick="CKEDITOR.tools.callFunction(18,this);return false;"><span class="cke_button_icon cke_button__flash_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/flash/icons/flash.png?t=G2VC20161114');background-position:0 0px;background-size:16px;">&nbsp;</span><span id="cke_18_label" class="cke_button_label cke_button__flash_label" aria-hidden="false">Flash</span></a><a id="cke_19" class="cke_button cke_button__table cke_button_off" href="javascript:void('表格')" title="表格" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_19_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(19,event);" onfocus="return CKEDITOR.tools.callFunction(20,event);" onclick="CKEDITOR.tools.callFunction(21,this);return false;"><span class="cke_button_icon cke_button__table_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -720px;background-size:auto;">&nbsp;</span><span id="cke_19_label" class="cke_button_label cke_button__table_label" aria-hidden="false">表格</span></a><span class="cke_toolbar_separator" role="separator"></span><a id="cke_20" class="cke_button cke_button__bold cke_button_off" href="javascript:void('加粗')" title="加粗" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_20_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(22,event);" onfocus="return CKEDITOR.tools.callFunction(23,event);" onclick="CKEDITOR.tools.callFunction(24,this);return false;"><span class="cke_button_icon cke_button__bold_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 0px;background-size:auto;">&nbsp;</span><span id="cke_20_label" class="cke_button_label cke_button__bold_label" aria-hidden="false">加粗</span></a><a id="cke_21" class="cke_button cke_button__italic cke_button_off" href="javascript:void('倾斜')" title="倾斜" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_21_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(25,event);" onfocus="return CKEDITOR.tools.callFunction(26,event);" onclick="CKEDITOR.tools.callFunction(27,this);return false;"><span class="cke_button_icon cke_button__italic_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -24px;background-size:auto;">&nbsp;</span><span id="cke_21_label" class="cke_button_label cke_button__italic_label" aria-hidden="false">倾斜</span></a><a id="cke_22" class="cke_button cke_button__strike cke_button_off" href="javascript:void('删除线')" title="删除线" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_22_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(28,event);" onfocus="return CKEDITOR.tools.callFunction(29,event);" onclick="CKEDITOR.tools.callFunction(30,this);return false;"><span class="cke_button_icon cke_button__strike_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -48px;background-size:auto;">&nbsp;</span><span id="cke_22_label" class="cke_button_label cke_button__strike_label" aria-hidden="false">删除线</span></a><span class="cke_toolbar_separator" role="separator"></span><a id="cke_23" class="cke_button cke_button__numberedlist cke_button_off" href="javascript:void('编号列表')" title="编号列表" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_23_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(31,event);" onfocus="return CKEDITOR.tools.callFunction(32,event);" onclick="CKEDITOR.tools.callFunction(33,this);return false;"><span class="cke_button_icon cke_button__numberedlist_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -624px;background-size:auto;">&nbsp;</span><span id="cke_23_label" class="cke_button_label cke_button__numberedlist_label" aria-hidden="false">编号列表</span></a><a id="cke_24" class="cke_button cke_button__bulletedlist cke_button_off" href="javascript:void('项目列表')" title="项目列表" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_24_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(34,event);" onfocus="return CKEDITOR.tools.callFunction(35,event);" onclick="CKEDITOR.tools.callFunction(36,this);return false;"><span class="cke_button_icon cke_button__bulletedlist_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -576px;background-size:auto;">&nbsp;</span><span id="cke_24_label" class="cke_button_label cke_button__bulletedlist_label" aria-hidden="false">项目列表</span></a><span class="cke_toolbar_separator" role="separator"></span><a id="cke_25" class="cke_button cke_button__justifyleft cke_button_off" href="javascript:void('左对齐')" title="左对齐" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_25_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(37,event);" onfocus="return CKEDITOR.tools.callFunction(38,event);" onclick="CKEDITOR.tools.callFunction(39,this);return false;"><span class="cke_button_icon cke_button__justifyleft_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -960px;background-size:auto;">&nbsp;</span><span id="cke_25_label" class="cke_button_label cke_button__justifyleft_label" aria-hidden="false">左对齐</span></a><a id="cke_26" class="cke_button cke_button__justifycenter cke_button_off" href="javascript:void('居中')" title="居中" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_26_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(40,event);" onfocus="return CKEDITOR.tools.callFunction(41,event);" onclick="CKEDITOR.tools.callFunction(42,this);return false;"><span class="cke_button_icon cke_button__justifycenter_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -936px;background-size:auto;">&nbsp;</span><span id="cke_26_label" class="cke_button_label cke_button__justifycenter_label" aria-hidden="false">居中</span></a><span class="cke_toolbar_separator" role="separator"></span><a id="cke_27" class="cke_button cke_button__blockquote cke_button_off" href="javascript:void('块引用')" title="块引用" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_27_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(43,event);" onfocus="return CKEDITOR.tools.callFunction(44,event);" onclick="CKEDITOR.tools.callFunction(45,this);return false;"><span class="cke_button_icon cke_button__blockquote_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -144px;background-size:auto;">&nbsp;</span><span id="cke_27_label" class="cke_button_label cke_button__blockquote_label" aria-hidden="false">块引用</span></a><a id="cke_28" class="cke_button cke_button__codesnippet cke_button_off" href="javascript:void('插入代码段')" title="插入代码段" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_28_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(46,event);" onfocus="return CKEDITOR.tools.callFunction(47,event);" onclick="CKEDITOR.tools.callFunction(48,this);return false;"><span class="cke_button_icon cke_button__codesnippet_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -840px;background-size:auto;">&nbsp;</span><span id="cke_28_label" class="cke_button_label cke_button__codesnippet_label" aria-hidden="false">插入代码段</span></a></span><span class="cke_toolbar_separator" role="separator"></span><span id="cke_11" class="cke_combo cke_combo__format cke_combo_off" role="presentation"><span id="cke_11_label" class="cke_combo_label">格式</span><a class="cke_combo_button" title="格式" tabindex="-1" href="javascript:void('格式')" hidefocus="true" role="button" aria-labelledby="cke_11_label" aria-haspopup="true" onkeydown="return CKEDITOR.tools.callFunction(50,event,this);" onfocus="return CKEDITOR.tools.callFunction(51,event);" onclick="CKEDITOR.tools.callFunction(49,this);return false;"><span id="cke_11_text" class="cke_combo_text cke_combo_inlinelabel">格式</span><span class="cke_combo_open"><span class="cke_combo_arrow"></span></span></a></span><span class="cke_toolgroup" role="presentation"><a id="cke_29" class="cke_button cke_button__source cke_button_off" href="javascript:void('')" title="" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_29_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(52,event);" onfocus="return CKEDITOR.tools.callFunction(53,event);" onclick="CKEDITOR.tools.callFunction(54,this);return false;"><span class="cke_button_icon cke_button__source_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -696px;background-size:auto;">&nbsp;</span><span id="cke_29_label" class="cke_button_label cke_button__source_label" aria-hidden="false"></span></a><a id="cke_30" class="cke_button cke_button__maximize cke_button_off" href="javascript:void('全屏')" title="全屏" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_30_label" aria-haspopup="false" onkeydown="return CKEDITOR.tools.callFunction(55,event);" onfocus="return CKEDITOR.tools.callFunction(56,event);" onclick="CKEDITOR.tools.callFunction(57,this);return false;"><span class="cke_button_icon cke_button__maximize_icon" style="background-image:url('https://my.oschina.net/dist/www/vendor/ckeditor/4.5.8/plugins/icons.png?t=G2VC20161114');background-position:0 -648px;background-size:auto;">&nbsp;</span><span id="cke_30_label" class="cke_button_label cke_button__maximize_label" aria-hidden="false">全屏</span></a></span><span class="cke_toolbar_end"></span></span></span></span><div id="cke_1_contents" class="cke_contents cke_reset" role="presentation" style="height: 83px;"><span id="cke_35" class="cke_voice_label">按 ALT+0 获得帮助</span><iframe src="" frameborder="0" class="cke_wysiwyg_frame cke_reset" title="所见即所得编辑器, ckeditor" aria-describedby="cke_35" tabindex="0" allowtransparency="true" style="width: 100%; height: 100%;"></iframe></div><span id="cke_1_bottom" class="cke_bottom cke_reset_all" role="presentation" style="user-select: none;"><span id="cke_1_path_label" class="cke_voice_label">元素路径</span><span id="cke_1_path" class="cke_path" role="group" aria-labelledby="cke_1_path_label"><span class="cke_path_empty">&nbsp;</span></span></span></div></div>
+                </div>
+                <!-- 编辑器选择项部分 -->
+                <div class="edit-select">
+                    <div class="edit-tags edit-panel">
+                        <div class="row-left">
+                            <input type="text" name="tags" id="input_tags" class="hide" value="">
+                            标签：
+                        </div>
+                        <div class="row-right">
+                            <div class="tags"></div>
+                            <div class="add-tags-box">
+                                <input type="text" class="input-tags" placeholder="请输入关键词，用逗号隔开，最多5个哦" maxlength="20" style="display: inline-block;">
+                                <ul class="autoPrompt"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="edit-panel edit-list">
+                        <ul>
+                            <li class="edit-row edit-sys-sort">
+                                <div class="row-left">
+                                    <span class="font-red">* </span>系统分类:
+                                </div>
+                                <div class="row-right">
+                                    <div class="select-box">
+                                        <input class="drop-input select-input" id="sys_sort" type="hidden" name="classification" value="0">
+                                        <span class="select-show"><span class="font-gray">请选择</span></span>
+                                        <i class="icon-tri select-icon"></i>
+                                        <div class="dropdown">
+                                            <div class="select-opt" data-value="428602">移动开发</div>
+                                            <div class="select-opt" data-value="428612">前端开发</div>
+                                            <div class="select-opt" data-value="5611447">人工智能</div>
+                                            <div class="select-opt" data-value="428640">服务端开发/管理</div>
+                                            <div class="select-opt" data-value="429511">游戏开发</div>
+                                            <div class="select-opt" data-value="428609">编程语言</div>
+                                            <div class="select-opt" data-value="428610">数据库</div>
+                                            <div class="select-opt" data-value="428611">企业开发</div>
+                                            <div class="select-opt" data-value="428647">图像/多媒体</div>
+                                            <div class="select-opt" data-value="428613">系统运维</div>
+                                            <div class="select-opt" data-value="428638">软件工程</div>
+                                            <div class="select-opt" data-value="5593654">大数据</div>
+                                            <div class="select-opt" data-value="428639">云计算</div>
+                                            <div class="select-opt" data-value="430884">开源硬件</div>
+                                            <div class="select-opt" data-value="430381">其他类型</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="edit-row is-original">
+                                <div class="row-left">
+                                    文章类型:
+                                </div>
+                                <div class="row-right">
+                                    <input type="radio" name="type" id="isOriginal" value="1" checked="true">
+								<span class="radio-label">
+									<label class="radio" for="isOriginal"></label>
+									<label for="isOriginal">原创</label>
+								</span>
+                                    <input type="radio" name="type" id="notOriginal" value="4">
+								<span class="radio-label">
+									<label class="radio" for="notOriginal"></label>
+									<label for="notOriginal">转帖</label>
+									<input type="text" class="ext-url" name="origin_url" placeholder="输入转帖的原文链接" value="" maxlength="100">
+								</span>
+                                </div>
+                            </li>
+                            <li class="edit-row">
+                                <div class="row-left">
+                                    <label for="isPrivate" class="label-desc">是否对所有人可见:</label>
+                                </div>
+                                <div class="row-right">
+                                    <input type="checkbox" name="privacy" id="isPrivate" value="0">
+                                    <label class="offon active" for="isPrivate"></label>
+                                </div>
+                            </li>
+                            <li class="edit-row">
+                                <div class="row-left">
+                                    <label for="isComment" class="label-desc">是否允许评论:</label>
+                                </div>
+                                <div class="row-right">
+                                    <input type="checkbox" name="deny_comment" id="isComment" value="0">
+                                    <label class="offon active" for="isComment"></label>
+                                </div>
+                            </li>
+                            <li class="edit-row">
+                                <div class="row-left">
+                                    <label for="isStickTop" class="label-desc">是否置顶:</label>
+                                </div>
+                                <div class="row-right">
+                                    <input type="checkbox" name="as_top" id="isStickTop" value="0">
+                                    <label class="offon " for="isStickTop"></label>
+                                </div>
+                            </li>
+                            <li class="edit-row hide">
+                                <div class="row-left">
+                                    <label for="isRecommend" class="label-desc">
+                                        是否自荐:
+                                        <span class="tooltip"><i class="label">i</i><span class="tip-con">自荐成功后，会显示在首页</span></span>
+                                    </label>
+                                </div>
+                                <div class="row-right">
+                                    <input type="checkbox" name="isRecommend" id="isRecommend">
+                                    <label class="offon" for="isRecommend"></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 编辑器保存按钮部分 -->
+        <div class="edit-ctrl edit-fixed-footer">
+            <div class="container">
+                <button type="button" class="stash-draft btn-disabled ">保存草稿</button>
+                <button type="button" class="btn btn-green btn-save btn-disabled ">发 布</button>
+            </div>
+        </div>
+    </form>
+    <!-- 错误提示框 -->
+    <div data-type="tip" data-tip-type="fixed" class="tooltips-box">
+        <div class="tooltips" id="error_tip"></div>
+    </div>
+    <!-- 回到顶部按钮 -->
+    <div class="tool-top" style="display: none;">
+        <a href="#" class="over">
+            <div class="icon">
+                <i class="icon-svg icon-go-top"></i>
+            </div>
+            <div class="txt">顶部</div>
+        </a>
+    </div>
+</div>
+<script type="text/javascript" src="js/ckeditor.js"></script>
 </html>

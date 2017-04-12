@@ -48,7 +48,7 @@ class ErrorMsg{
         self::NOWORK           => '没有该作品',
         self::NOPASSWD         => '缺少密码',
         self::NOUSER           => '没有该用户',
-        self::HAVEDTITLE       => '已经存在改title',
+        self::HAVEDTITLE       => '已经存在该title',
         self::ERRUPLOAD        => '文件上传错误',
         self::TOOBIG           => '文件太大了',
         self::ERRPIC           => '图片格式错误',
