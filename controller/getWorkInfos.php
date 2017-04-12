@@ -27,10 +27,10 @@ class GetWorkInfos extends controllerBase {
     public function run() {
         $params = $this->getParams();
         $worksModel = new WorksModel();
-        if (!isset($params['op'])) {
+        if ($params['op'] == 'user') {
             $uid = $this->_curUser['uid'];
             $res = $worksModel->getWorkInfos(array('create_uid' => $uid, 'status' => 1));
-        } else if (empty($params['wid'])) {
+        } else if (!empty($params['wid'])) {
             $res = $worksModel->getWorkInfos(array('wid' => $params['wid']));
         } else{
             $page = empty($params['page']) ? 1 : $params['page'];
@@ -44,7 +44,7 @@ class GetWorkInfos extends controllerBase {
             $result = $worksModel->getWorkInfos($condition, $page, $pagesize);
             $total = $worksModel->getTotalOfWorks($condition);
             $res = array(
-                'total'    => $total,
+                'total'    => current($total),
                 'page'     => $page,
                 'pagesize' => $pagesize,
                 'list'     => $result,

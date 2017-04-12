@@ -27,53 +27,6 @@
         }
     </style>
 
-    <script>
-        jQuery(function(){
-            jQuery('#camera_wrap_2').camera({
-                loader: 'bar',
-                pagination: false,
-                thumbnails: false
-            });
-        });
-
-        $(document).ready(function() {
-            var type = GetQueryString("type");
-            ishowAjax({
-                type: "post",
-                url:  "../controller/getWorkInfos.php",
-                data: {'type': type},
-                cache: false,
-                async: false,
-                dataType: "json",
-                success: function(result, status, jsXHR) {
-                    var json = JSON.parse(result);
-                    if (0 == json.code) {
-                        if (json.data != null) {
-                            var select = document.getElementsByTagName("select")[0];
-                            if (json.data.list != null) {
-                                $.each(json.data.list, function(key, value) {
-                                    var dl = select.createElement("dl");
-                                    dl.class = "am-accordion-item";
-                                    var dt = dl.createElement("dt");
-                                    dt.class = "am-accordion-title";
-                                    dt.innerHTML = json.data.list[key].title;
-                                    var dd = dl.createElement("dd");
-                                    dd.class = "am-accordion-content am-collapse";
-                                    dd.innerHTML = json.data.list[key].content;
-                                    dl.appendChild(dt);
-                                    dl.appendChild(dd);
-                                });
-                            }
-                        }
-                    } else {
-                        alert(json.msg);
-                    }
-                },
-            });
-        });
-
-    </script>
-
 </head>
 <body>
 <!--star wrap-->
@@ -106,28 +59,10 @@
             <!--grid-left-->
             <div class="grid-left">
                 <section data-am-widget="accordion" class="am-accordion am-accordion-default"data-am-accordion='{  }'>
-                    <dl class="am-accordion-item">
-                        <dt class="am-accordion-title">周培源力学竞赛个人参赛经验分享</dt>
-                        <dd class="am-accordion-content am-collapse"><small>发布时间：2016-10-31 14:00:00 浏览次数：16<br><br></small>
-                            <strong>1、回顾基础知识阶段</strong>
-                            <p>力学竞赛的考纲在官网上可以查到，和大部分高等院校理论力学和材料力学的教学大纲是类似的。在复习的时候可以选择一本自己比较熟悉的教材，公式、定理的推导过程熟记在心，书后的题目也要做好。目前市面上公认的比较好的理论力学教材是哈工大第5版，后面的版本略难，如果基础好的话可以直接用最新版；材料力学的教材是刘鸿文编写的，各个版本差别不大。对应的书后题答案在网上可以下载，或者有配套的教辅，可以作为参考。</p>
-                            <strong>2、自我提升阶段</strong>
-                            <p>复习基础知识以后可以选择做一些比较难的题目。国防工业出版社出版的考研题集很不错，推荐大家做一做。</p>
-                            <p> 另外，诚挚推荐单辉祖的《材料力学 问题例题与分析方法（第三版）》，整本书的思路很好，题的难度循序渐进，每一个题都很值得做。</p>
-                            <strong>3、冲刺阶段</strong>
-                            <p>如果备考时间不长的话，可以直接跳过第2个阶段。备考的最后阶段，可以先试着做一做以前的考题，如果每套题能在规定的时间内完成50%，我个人觉得就真的可以了，说明你的能力足够了。做完以后好好分析每道题的思路。其实每年的命题学校不一样，考题的难度和整体思路也不一样，但是多做做总没有坏处。</p>
-                            <p>如果想再多做一些题的话，推荐一本竞赛方面的书：《大学生力学竞赛与建模》，题目都很不错，建议大家选择性地做一下。</p>
-                        </dd>
-                    </dl>
                 </section>
                 <div class="txt-center">
                     <div class="page-numbers ">
-                        <ul>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">》</a></li>
-                            <div class="clear"> </div>
+                        <ul id="page-ul">
                         </ul>
                     </div></div>
             </div>
@@ -141,11 +76,11 @@
                         <div class="clear"> </div>
                     </div>
                     <ul class="seach-links">
-                        <li ><a href="list-work.html?type=1">工科</a></li>
-                        <li class="active"><a href="list-work.html?type=2" >理科</a></li>
-                        <li><a href="list-work.html?type=3">商科</a></li>
-                        <li ><a href="list-work.html?type=4">文体</a></li>
-                        <li><a href="list-work.html">综合</a></li>
+                        <li class="test-li"><a href="list-work.html?type=1">工科</a></li>
+                        <li class="test-li"><a href="list-work.html?type=2" >理科</a></li>
+                        <li class="test-li"><a href="list-work.html?type=3">商科</a></li>
+                        <li class="test-li"><a href="list-work.html?type=4">文体</a></li>
+                        <li class="test-li"><a href="list-work.html?type=0">综合</a></li>
                     </ul>
                     <div class="grid-right-headings">
                         <h2><a href="#">优秀文案</a></h2>
@@ -153,17 +88,17 @@
                         <div class="clear"> </div>
                     </div>
                     <ul class="seach-links">
-                        <li><a href="list-work.html?type=10">项目申请</a></li>
-                        <li><a href="list-work.html?type=10">项目介绍</a></li>
-                        <li><a href="list-work.html?type=10">项目结题</a></li>
+                        <li class="test-li"><a href="list-work.html?type=11">项目申请</a></li>
+                        <li class="test-li"><a href="list-work.html?type=12">项目介绍</a></li>
+                        <li class="test-li"><a href="list-work.html?type=13">项目结题</a></li>
                     </ul>
                     <div class="grid-right-headings">
-                        <h2><a href="list-work.html?type=10">优秀PPT</a></h2>
+                        <h2><a href="#">优秀PPT</a></h2>
                         <h6> </h6>
                         <div class="clear"> </div>
                     </div>
                     <ul class="seach-links">
-                        <li><a href="list-work.html?type=10">答辩PPT</a></li>
+                        <li class="test-li"><a href="list-work.html?type=14">答辩PPT</a></li>
                     </ul>
                 </div>
             </div>
@@ -179,4 +114,106 @@
 <div class="include" file="ender.html"></div>
 </body>
 <script type="text/javascript" src="js/include.js"></script>
+<script>
+    jQuery(function(){
+        jQuery('#camera_wrap_2').camera({
+            loader: 'bar',
+            pagination: false,
+            thumbnails: false
+        });
+    });
+
+    $(document).ready(function() {
+        var type = GetQueryString("type");
+        var page = GetQueryString("page");
+        var pagesize = GetQueryString("pagesize");
+        if (page == null || page == undefined || page == "") {
+            page = 1;
+        }
+        if (pagesize == null || pagesize == undefined || pagesize == "") {
+            pagesize = 25;
+        }
+        ishowAjax({
+            type: "post",
+            url:  "../controller/getWorkInfos.php",
+            data: {'type': type, 'page': page, 'pagesize': pagesize},
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function(json, status, jsXHR) {
+                if (0 == json.code) {
+                    if (json.data != null) {
+                        var select = document.getElementsByTagName("section")[0];
+                        if (json.data.list != null) {
+                            $.each(json.data.list, function(key, value) {
+                                var dl = document.createElement("dl");
+                                dl.setAttribute("class", "am-accordion-item");
+                                var dt = document.createElement("dt");
+                                dt.setAttribute("class", "am-accordion-title");
+                                dt.innerHTML = value.title;
+                                var dd = document.createElement("dd");
+                                dd.setAttribute("class", "am-accordion-content am-collapse");
+                                var small = document.createElement("small");
+                                var time = formateDate(value.create_time);
+                                small.innerHTML = "发布时间：" + time + " 浏览次数：" + value.brower_num + "<br><br>";
+                                dd.appendChild(small);
+                                var p = document.createElement("p");
+                                p.innerHTML = value.content;
+                                dd.appendChild(p);
+                                dl.appendChild(dt);
+                                dl.appendChild(dd);
+                                select.appendChild(dl);
+                            });
+                        }
+                        if (json.data.total > json.data.pagesize) {
+                            var type = GetQueryString("type");
+                            var ul = document.getElementById("page-ul");
+                            for (var i = 1; i < (json.data.total/json.data.pagesize) + 1; i++) {
+                                var li = document.createElement("li");
+                                var a = document.createElement("a");
+                                a.href = "list-work.html?type=" + type + "&page=" + i +"&pagesize=" + json.data.pagesize;
+                                a.innerHTML = i;
+                                li.appendChild(a);
+                                if (json.data.page == i) {
+                                    li.setAttribute("class", "active");
+                                }
+                                ul.appendChild(li);
+                            }
+                            var div = document.createElement("div");
+                            div.setAttribute("class", "clear");
+                            ul.appendChild(div);
+                        }
+                    }
+                } else {
+                    alert(json.msg);
+                }
+            },
+        });
+    });
+
+    $(document).ready(function() {
+        var type = GetQueryString("type");
+        var lis = document.getElementsByClassName("test-li");
+        if (type == "1") {
+            lis[0].setAttribute("class", "active");
+        } else if (type == "2") {
+            lis[1].setAttribute("class", "active");
+        } else if (type == "3") {
+            lis[2].setAttribute("class", "active");
+        } else if (type == "4") {
+            lis[3].setAttribute("class", "active");
+        } else if (type == "0") {
+            lis[4].setAttribute("class", "active");
+        } else if (type == "11") {
+            lis[5].setAttribute("class", "active");
+        } else if (type == "12") {
+            lis[6].setAttribute("class", "active");
+        } else if (type == "13") {
+            lis[7].setAttribute("class", "active");
+        } else if (type == "14") {
+            lis[8].setAttribute("class", "active");
+        }
+    });
+
+</script>
 </html>

@@ -35,4 +35,15 @@ function GetQueryString(name)
     if(r!=null)return  unescape(r[2]); return null;
 }
 
+var formateDate = function formateDate(timesTamp) {
+    var date = new Date(timesTamp*1000);
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var day = date.getDay();
+    var hour = date.getHours();
+    var minue = date.getMinutes();
+    var seconds = date.getSeconds();
+    return year+"-"+month+"-"+day+" "+hour+":"+minue+":"+seconds;
+}
+
 
