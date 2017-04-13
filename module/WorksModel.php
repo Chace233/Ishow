@@ -71,7 +71,7 @@ class WorksModel extends Model {
     }
 
     public function getTotalOfWorks($condition) {
-        $sql = 'SELECT SUM(`wid`) AS `total`
+        $sql = 'SELECT COUNT(`wid`) AS `total`
                 FROM ' . $this->_tbName;
         $whereArr = array();
         if (!empty($condition['wid'])) {

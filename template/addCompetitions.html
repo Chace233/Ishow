@@ -53,8 +53,7 @@
                     cache: false,
                     async: false,
                     dataType: "json",
-                    success: function(result, textStatus, jsXHR) {
-                        var json = JSON.parse(result);
+                    success: function(json, textStatus, jsXHR) {
                         if (0 == json.code) {
                             alert("提交成功");
                         } else {
@@ -63,6 +62,7 @@
                         return true;
                     },
                     error:function (XMLHttpRequest, textStatus, errorThrow) {
+                        console.info(errorThrow);
                         console.info(errorThrow);
                         return false;
                     }

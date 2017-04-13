@@ -73,7 +73,16 @@
 		
 	});
 
-
+	$(document).ready(function(){
+		$.get("../controller/GetUserInfos.php", function(result, status){
+			if (0 != result.code) {
+				window.alter(result.msg);
+			} else {
+				var data = result.data;
+				window.alter(data);
+			}
+		});
+	});
 	</script>
 <!--Add fancyBox main JS and CSS files-->
 <script src="js/jquery.magnific-popup.js" type="text/javascript"></script>

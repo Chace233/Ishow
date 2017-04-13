@@ -35,4 +35,27 @@ function GetQueryString(name)
     if(r!=null)return  unescape(r[2]); return null;
 }
 
+var formateDate = function formateDate(timesTamp) {
+    var date = new Date(timesTamp*1000);
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var day = date.getDay();
+    var hour = date.getHours();
+    var minue = date.getMinutes();
+    var seconds = date.getSeconds();
+    return year+"-"+month+"-"+day+" "+hour+":"+minue+":"+seconds;
+}
+
+var sub_string = function sub_string(str,n){
+    var r=/[^\x00-\xff]/g;
+    if(str.replace(r,"mm").length<=n){return str;}
+    var m=Math.floor(n/2);
+    for(var i=m;i<str.length;i++){
+        if(str.substr(0,i).replace(r,"mm").length>=n){
+            return str.substr(0,i)+"...";
+        }
+    }
+    return str;
+}
+
 

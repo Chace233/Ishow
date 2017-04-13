@@ -37,7 +37,7 @@ class AddCompetition extends controllerBase {
             'download'    => empty($params['download']) ? '' : $params['download'],
             'start_time'  => empty($params['start_time']) ? time() : $params['start_time'],
             'end_time'    => empty($params['end_time']) ? time()+24*3600 : $params['end_time'],
-            'type'        => 10,
+            'type'        => empty($params['type']) ? 10 : $params['type'],
             'pic'         => empty($params['pic']) ? '' : $params['pic'],
         );
         if ($addArr['start_time'] == $params['end_time']) {
