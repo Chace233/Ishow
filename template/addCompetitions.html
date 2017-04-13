@@ -44,8 +44,8 @@
                 var title = document.getElementById("titleValue").value;
                 var content = document.getElementById("contentValue").value;
                 var type = document.getElementById("typeValue").value;
-                var start_time = Date.parse(document.getElementById("start_time").value) / 1000;
-                var end_time = Date.parse(document.getElementById("end_time").value) / 1000;
+                var start_time = document.getElementById("start_time").value;
+                var end_time = document.getElementById("end_time").value;
                 ishowAjax({
                     type: "post",
                     url: "../controller/addCompetition.php",

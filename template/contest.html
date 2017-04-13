@@ -178,15 +178,14 @@
 							div4.appendChild(h2);
 							var span3 = document.createElement("span");
 							span3.setAttribute("class", "org");
-							var time = formateDate(value.start_time);
-							span3.innerHTML = time;
+							span3.innerHTML = value.start_time;
 							div4.appendChild(span3);
 							var h3 = document.createElement("h3");
 							h3.innerHTML = "结束时间";
 							div4.appendChild(h3);
 							var span4 = document.createElement("span");
 							span4.setAttribute("class", "org");
-							span4.innerHTML = formateDate(value.end_time);
+							span4.innerHTML = value.end_time;
 							div4.appendChild(span4);
 							div3.appendChild(div4);
 							var div5 = document.createElement("div");

@@ -32,12 +32,16 @@ class AddComment extends controllerBase {
             'create_time' => time(),
         );
         $commentModel = new CommentModel();
+        $res = $commentModel->getCommentList(array('obj_id'=>$params['obj'], 'type'=>$params['type'], 'uid'=>$uid));
+        if (!empty($res)) {
+            aj_output(ErrorMsg::COMMENTED);
+        }
         $res = $commentModel->insert($addArr);
-        if (fasle === $res) {
+        if (false === $res) {
             aj_output(ErrorMsg::ERROR_SUBMIT);
         }
         $addNotificatition = array(
-            'obj_id'  => $params['obj'],
+            'obj_id'   => $params['obj'],
             'from_uid' => $uid,
             'type'     => $params['type'],
         );

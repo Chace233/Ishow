@@ -36,7 +36,7 @@ class CommentModel extends Model {
             $whereArr[] = "`type` = " . $condition['type'];
         }
         if (!empty($condition['uid'])) {
-            $whereArr[] = "`uid` = " . $condition['uid'];
+            $whereArr[] = "c.`uid` = " . $condition['uid'];
         }
         if (!empty($condition['status'])) {
             $whereArr[] = "`status` = " . $condition['status'];

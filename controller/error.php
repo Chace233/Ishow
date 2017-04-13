@@ -29,6 +29,8 @@ class ErrorMsg{
     const TOOLONG           = 20020;//输入的内容太长了
     const NOWID             = 20021;//没有传入wid
     const NOPERMISSION      = 20022;//没有权限操作
+    const VOTEED            = 20023;//已经点赞过
+    const COMMENTED         = 20024;//已经评论过了
 
 
     static $msg = array(
@@ -55,6 +57,8 @@ class ErrorMsg{
         self::TOOLONG          => '输入的内容太长了',
         self::NOWID            => '缺少wid参数',
         self::NOPERMISSION     => '无权限操作',
+        self::VOTEED           => '已经点赞过',
+        self::COMMENTED        => '已经评论过了',
     );
 
 

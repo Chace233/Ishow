@@ -13,12 +13,12 @@ class CompetitionsModel extends Model{
     protected $_tbName = '`tblCompetitions`';
 
     public function getCompetitionInfos($condition, $page=1, $pagesize=25) {
-        $sql = 'SELECT `cpid`, `title`, `content`, `create_time`, `status`, `download`, `start_time`, `end_time`, `type`
+        $sql = 'SELECT `cpid`, `title`, `content`, `create_time`, `status`, `download`, `start_time`, `end_time`, `type`, `pic`
                 FROM ' . $this->_tbName;
         $whereArr = array();
         if (!empty($condition['cpid'])) {
             if (is_array($condition['cpid'])) {
-                $whereArr['cpid'] = '`cpid` IN (' . implode(', ', $condition['cpid']);
+                $whereArr['cpid'] = '`cpid` IN (' . implode(', ', $condition['cpid']) . ')';
             } else {
                 $whereArr['cpid'] = '`cpid` = ' . $condition['cpid'];
             }
@@ -27,7 +27,7 @@ class CompetitionsModel extends Model{
             $whereArr['type'] = '`type` = ' . $condition['type'];
         }
         if (!empty($whereArr)) {
-            $sql .= ' WHERE ' . implode(' AND ', $whereArr) . ') ';
+            $sql .= ' WHERE ' . implode(' AND ', $whereArr) . ' ';
         }
         $sql .= ' ORDER BY `start_time` DESC LIMIT ' . ($page - 1) * $pagesize . ', ' . $pagesize;
         $res = $this->Query($sql);

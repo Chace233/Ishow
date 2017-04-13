@@ -25,17 +25,21 @@ class GetCompetitions extends controllerBase {
         }
         $competitionModel = new CompetitionsModel();
         $res = $competitionModel->getCompetitionInfos($condition, $page, $pagesize);
-        $total = $competitionModel->getTotal($condition);
-        $result = array();
-        if (!empty($res)) {
-            $result = array(
-                'page'     => $page,
-                'pagesize' => $pagesize,
-                'total'    => current($total),
-                'list'     => $res,
-            );
+        if (isset($params['cpid']) || !empty($params['cpid'])) {
+            aj_output(ErrorMsg::SUCCESS, '', $res);
+        } else {
+            $total = $competitionModel->getTotal($condition);
+            $result = array();
+            if (!empty($res)) {
+                $result = array(
+                    'page'     => $page,
+                    'pagesize' => $pagesize,
+                    'total'    => current($total),
+                    'list'     => $res,
+                );
+            }
+            aj_output(ErrorMsg::SUCCESS, '', $result);
         }
-        aj_output(ErrorMsg::SUCCESS, '', $result);
     }
 }
 

@@ -1,3 +1,14 @@
-<p><a href="#">“挑战杯”四川大学2017年学生科技节之软件设计大赛</a></p>
-<p><a href="#">“挑战杯”四川大学2017年学生科技节之创意雕刻大赛</a></p>
-<p><a href="#">“挑战杯”四川大学2017年学生科技节之网页设计大赛</a></p>
+<div class="media response-info">
+	<div class="media-left response-text-left">
+		<a href="#">
+			<img src="images/sin1.jpg" class="img-responsive" alt="">
+		</a>
+	</div>
+	<div class="media-body response-text-right">
+		<p>如何打印准考证？是直接用a4纸打印一张准考证吗？还是让准考证的两页分别在一张a4纸的正反面？</p>
+	</div>
+	<div class="clearfix"> </div>
+</div>
+
+SELECT c.`cid`, c.`obj_id`, c.`type`, c.`content`, c.`uid`, c.`create_time`, u.`uname`, u.`feature`, u.`headpic`, u.`tel`, u.`email`, u.`intro`
+FROM `tblcomment` AS `c` LEFT JOIN `tblUser` AS `u` ON c.`uid` = u.`uid` WHERE `obj_id` = 1 AND `type` = 2 AND `uid` = 1492052887 ORDER BY `create_time` DESC LIMIT 0, 25
