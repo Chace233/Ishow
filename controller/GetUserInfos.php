@@ -12,7 +12,7 @@ require_once '../module/UserModel.php';
 require_once '../module/ScoresModel.php';
 
 class getUserInfos extends controllerBase {
-    protected $_fields = array('uname', 'feature');
+    protected $_fields = array('uname');
 
     /**
      * getUserInfos constructor.
@@ -33,7 +33,6 @@ class getUserInfos extends controllerBase {
                 'uname' => $params['uname'],
             );
         }
-        $condition['feature'] = isset($params['feature']) ? $params['feature'] : 1;
         $userinfos = $userModel->getUserInfos($condition);
         $scoresModel = new ScoreModel();
         $userinfos[0]['scores'] = current($scoresModel->getUserScoresSum($userinfos[0]['uid']));

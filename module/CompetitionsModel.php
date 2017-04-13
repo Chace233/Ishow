@@ -34,6 +34,27 @@ class CompetitionsModel extends Model{
         return $res;
     }
 
+    public function getTotal($condition) {
+        $sql = 'SELECT COUNT(`cpid`) AS  `total`
+                FROM ' . $this->_tbName;
+        $whereArr = array();
+        if (!empty($condition['cpid'])) {
+            if (is_array($condition['cpid'])) {
+                $whereArr['cpid'] = '`cpid` IN (' . implode(', ', $condition['cpid']);
+            } else {
+                $whereArr['cpid'] = '`cpid` = ' . $condition['cpid'];
+            }
+        }
+        if (!empty($condition['type'])) {
+            $whereArr['type'] = '`type` = ' . $condition['type'];
+        }
+        if (!empty($whereArr)) {
+            $sql .= ' WHERE ' . implode(' AND ', $whereArr) . ') ';
+        }
+        $res = $this->Query($sql);
+        return current($res);
+    }
+
     public function getCompetitionInfoByCpids($cpids) {
         if (empty($cpids)) {
             return false;
