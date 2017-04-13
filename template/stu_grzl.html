@@ -24,6 +24,7 @@
 	<script src="js/amazeui.min.js"></script>
 	<script src="js/handlebars.min.js"></script>
 	<script src="js/amazeui.widgets.helper.min.js"></script>
+	<script src="js/ishow.ajax.js"></script>
     <script>
 		jQuery(function(){
 
@@ -42,6 +43,20 @@
 	.form-control {
   	height: 36px;
   	}
+
+  	.imgWait { 
+		width:100%; 
+		height:100%; 
+		background-color:#000; 
+		filter:alpha(opacity=50); 
+		-moz-opacity:0.5; 
+		opacity:0.5; 
+		position:absolute; 
+		left:0px; 
+		top:0px; 
+		display:none; 
+		z-index:1000; 
+	}
 	</style>
   </style>    
 <!-- end slider -->
@@ -121,13 +136,13 @@
 				   <div class="wrapper clearfix">
 				   <div class="you fl">
 					<div class="gxin">
-						<div class="tx"><a href="#"><img src="images/tx.png"/><p id="avatar">修改头像</p></a></div>
+						<div class="tx"><a href="#"><img id="p-head-pic" src="images/tx.png"/><p id="avatar">修改头像</p></a></div>
 						<div class="xx">
 							<h3 class="clearfix">
 							<a href="#" class="fr" id="edit1">编辑</a></h3>
-							<div>昵称：桃子</div>
-							<div>个性签名：python是世界上最好的语言</div>
-							<div>联系方式：abcd@outlook.com</div>
+							<div id="p-nickname">昵称：桃子</div>
+							<div id="p-motto">个性签名：python是世界上最好的语言</div>
+							<div id="p-contact">联系方式：abcd@outlook.com</div>
 						</div>
 					</div>
 					</div>
@@ -140,24 +155,29 @@
 			<div class="bj">
 			<div class="clearfix"><a href="#" class="fr gb"><img src="images/icon4.png"/></a></div>
 			<h3>编辑基础资料</h3>
-			<form action="#" method="get">
-				<p><label>填写昵称：</label><input type="text"  value="桃子" /></p>
-				<p><label>个性签名：</label><input type="text"   /></p>
-				<p><label>联系方式：</label><input type="text"   /></p>
+			<iframe id="nojump_iframe" name="nojump_iframe" style="display:none;"></iframe>    
+			<form id="form-submit-userinfo" action="#" method="get" target="nojump_iframe">
+				<p><label>填写昵称：</label><input type="text" name="uname"/></p>
+				<p><label>个性签名：</label><input type="text" name="intro"/></p>
+				<p><label>联系方式：</label><input type="text" name="tel"/></p>
 				<div class="bc">
-					<input type="button" value="保存"  />
+					<input type="submit" onclick="setTimeout('freshUserInfo()',2000);" value="保存" />
 					<input type="button" value="取消" />
 				</div>
+			</form>
+			<form id="form-submit-userhead" action="#" method="get" style="display:none;">
+				<input id="text-userhead-url" type="text" name="headpic"/>
 			</form>
 		    </div>
 			<div class="avatar">
 				<div class="clearfix"><a href="#" class="fr gb"><img src="images/icon4.png"/></a></div>
 				<h3>修改头像</h3>
-				<form action="#" method="get">
+				<form action="#" method="post">
 					<h4>请上传图片</h4>
-					<input type="button" value="上传头像" />
+					<input id="bu-file" type="button" value="选择头像" />
 					<p>jpg或png，大小不超过2M</p>
-					<input type="submit" value="提交" />
+					<input id="bu-upload-pic" type="button" value="上传" />
+					<input id="real-file" type="file" value="submit" style="display:none;"/>
 				</form>
 			</div>		    
 			<!--end blog-left-->
@@ -251,5 +271,120 @@
 		</div>
 	</div>
 </div>
+
+<div id="imgWait" class="imgWait">上传中...</div>
+
+<script type="text/javascript">
+    var UserInfo = {
+	    modNickname : function(nickname){
+	        if (nickname){
+	            $("#p-nickname").text("昵称："+nickname);
+	        }
+	    },
+	    modMotto : function(motto){
+	        if (motto){
+    			$("#p-motto").text("个性签名："+motto);
+	        }
+	    },
+	    modContact : function(contact){
+	        if (contact){
+                $("#p-contact").text("联系方式："+contact);
+	        }
+	    },
+	    modHeadPic : function(url){
+	        if (url){
+                $("#p-head-pic").attr("src",url);
+	        }
+	    }
+    }
+
+    var freshUserInfo = function(){
+	    ishowAjax({
+	        url:WEB_SERVER_HOST+"/controller/GetUserInfos.php",
+	        type:"get",
+	        dataType:"json",
+		    success:function(d){
+	            if (d){
+	            	if (d.code === 0){
+					    UserInfo.modNickname(d.data[0].uname);
+					    UserInfo.modMotto(d.data[0].intro);
+					    UserInfo.modContact(d.data[0].tel);
+					    UserInfo.modHeadPic(d.data[0].headpic);
+	            	}else{
+	            		console.error("获取用户信息错误",d.msg,d.code);
+	            	}
+	            }
+		    },
+		    error:function(d,code){
+	            console.error("访问出错",code);
+		    }
+	    });
+    }
+    
+    var modUserHeadInfo = function(pic_url){
+    	$("#text-userhead-url").attr("value", pic_url);
+        ishowAjax({
+	        url:WEB_SERVER_HOST+"/controller/updateUserInfo.php",
+	        type:"get",
+	        data:$("#form-submit-userhead").serialize(),
+	        dataType:"json",
+		    success:function(d){
+	            if (d.code !== 0){
+                    alert("更新头像失败");
+	            }
+                location.reload(false);
+		    },
+		    error:function(d,code){
+                alert("更新头像失败");
+		    	location.reload(false);
+		    }
+	    });
+    }
+
+    $(function () {
+        $("#bu-upload-pic").click(function () {
+            $("#imgWait").show();
+            var formData = new FormData();
+            formData.append("file", document.getElementById("real-file").files[0]);   
+            ishowAjax({
+                url: WEB_SERVER_HOST+"/controller/uploadFile.php?type=pic",
+                type: "POST",
+                data: formData,
+                dataType:"json",
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                	console.log(data);
+                    if (data.code === 0) {
+                        console.log(data.data.url);
+                        modUserHeadInfo(data.data.url);
+                    }
+                    if (data.code !== 0) {
+                        console.log(data.msg);
+                        location.reload(false);
+                    }
+                },
+                error: function (data) {
+                	console.log(data);
+                    alert("头像上传失败");
+                    $("#imgWait").hide();
+                    //location.reload(false);
+                }
+            });
+        });
+    });
+    
+    $(function(){
+		$("#bu-file").click(function(){
+			$("#bu-file").attr("value","已选择头像");
+			return $("#real-file").click(); 
+	    });
+	});
+
+    $("#form-submit-userinfo").attr("action",WEB_SERVER_HOST+"/controller/updateUserInfo.php");
+    
+    freshUserInfo();
+
+</script>
 </body>
 </html>

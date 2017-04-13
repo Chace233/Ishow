@@ -1,4 +1,5 @@
 var LOCAL_PLATFORM_TYPE=2
+var WEB_SERVER_HOST=""
 // 1-android
 // 2-web
 
@@ -21,10 +22,16 @@ var ishowAjax = function (settings) {
 			}else{
                 settings.error(data,err.statusCode);
 			}
-
 		}
+		settings.method = settings.type;
+		delete settings["type"];
+
         ajax(settings,callback);
 	}else if (LOCAL_PLATFORM_TYPE === 2){
         $.ajax(settings);
 	}
+}
+
+if (LOCAL_PLATFORM_TYPE === 1){
+	WEB_SERVER_HOST="http://192.168.1.100";
 }
