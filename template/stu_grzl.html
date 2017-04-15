@@ -64,43 +64,9 @@
 <body>
 <!--star wrap-->      
 <div class="wrap">	
-	<!--header--> 
-	<div class="header">
-		<!--start-logo-->
-	    <div class="logo">	
-	        <a href="index.html"><img src="images/logo.jpg"></a>
-	    </div>
-	    <!--end-logo-->
-<!--start-menu-->
-	  	<div class="menu">
-		  <a class="toggleMenu" href="#"><img src="images/nav.png" alt= " " /></a>
-			<ul class="nav">
-				<li class="active"><a href="index.html">首页</a></li>
-				<li class="dropdown">
-					<a href="jszd.html">竞赛指导</a>
-				</li>
-				<li class="dropdown">
-					<a href="contest.html">比赛推送</a>
-				</li>
-				<li class="dropdown">
-					<a href="production.html">优秀作品</a>
-				</li>	            
-				<li class="dropdown">									
-	            	<a href="phb.html" >排行榜</a>
-	            </li>
-				<li class="dropdown">									
-	            	<a href="user.html" >个人中心</a>
-	            </li>
-
-			<div class="clear"> </div>
-		    </ul>
-		    <script type="text/javascript" src="js/dropdown.js"></script>
-			<script type="text/javascript" src="js/responsive-nav.js"></script>
-
-	    </div>	
-	    <div class="clear"> </div>
-		<!--end-menu-->		            			            				
-	</div><!--end-header-->
+<!--header--> 
+<div class="include" file="header.html"></div>
+<!--end-header-->
 </div>
 <!--end wrap-->   
 <!--top- heading-->
@@ -218,59 +184,12 @@
 </div>
 <!--about-content-->
 <!--end about-->
-<!--start footer-->
-<div class="footer">
-	<div class="footer-main wrap">
-	<div class="footer-grids">
-		<div class="fgrid">
-			<h3>友情链接</h3>
-			<p><a href="http://www.scu.edu.cn" target="_black">四川大学</a></p>
-			<p><a href="http://xsc.scu.edu.cn/" target="_black">学工部</a></p>
-			<p><a href="http://jwc.scu.edu.cn/jwc/frontPage.action" target="_black">教务处</a></p>
-			<p><a href=" http://www.ccyl.org.cn/" target="_black">中国青年网</a></p>
-			<p></p>
-		</div>
-		<div class="fgrid">
-			<h3>关注我们</h3>
-				<div>
-					<p>新浪微博<a href="http://weibo.com/cdtw">@川大团委</a></p>
-					
-				</div>
-				<div>
-					<p>微信<a href="#">川大共青团</a></p>
 
-				</div>
-				<div>
-					<p>人人 <a href="#">@川大团委</a></p>
-				</div>
-		</div>
-		<div class="fgrid">
-			<h3>联系我们</h3>
-			<p>如果您有好的建议或者意见，请告诉我们。</p>
-			<a href="#"><p>rollcollege@gmail.com</p></a>
-			<h4></h4>
-				<div class="social-media">
-			     <ul>
-			        <li> <span class="simptip-position-bottom simptip-movable" data-tooltip="腾讯微博"><a href="#" target="_blank"> </a></span></li>
-			        <li><span class="simptip-position-bottom simptip-movable" data-tooltip="新浪微博"><a href="http://weibo.com/cdtw" target="_blank"> </a> </span></li>
-			        <li><span class="simptip-position-bottom simptip-movable" data-tooltip="邮箱"><a href="#" target="_blank"> </a></span></li>
-			        <li><span class="simptip-position-bottom simptip-movable" data-tooltip="qq空间"><a href="#" target="_blank"> </a></span></li>
-			        <li><span class="simptip-position-bottom simptip-movable" data-tooltip="百度贴吧"><a href="#" target="_blank"> </a></span></li>
-				</ul>
-		</div>
-		</div>
-		<div class="clear"> </div>
-	</div>
-</div>
-</div>
+<!--start footer-->
+<div class="include" file="footer.html"></div>
+<div class="include" file="ender.html"></div>
 <!--end footer-->
-<div class="copy-right">
-	<div class="wrap">
-		<div class="copy-right-left">
-			<p>Copyright &copy; 2017.<a href="haj.fyscu.com">ISHOW</a> All rights reserved.</p>
-		</div>
-	</div>
-</div>
+<script src="js/include.js"></script>
 
 <div id="imgWait" class="imgWait">上传中...</div>
 
@@ -300,7 +219,7 @@
 
     var freshUserInfo = function(){
 	    ishowAjax({
-	        url:WEB_SERVER_HOST+"/controller/GetUserInfos.php",
+	        url:WEB_SERVER_HOST+"../controller/GetUserInfos.php",
 	        type:"get",
 	        dataType:"json",
 		    success:function(d){
@@ -324,7 +243,7 @@
     var modUserHeadInfo = function(pic_url){
     	$("#text-userhead-url").attr("value", pic_url);
         ishowAjax({
-	        url:WEB_SERVER_HOST+"/controller/updateUserInfo.php",
+	        url:WEB_SERVER_HOST+"../controller/updateUserInfo.php",
 	        type:"get",
 	        data:$("#form-submit-userhead").serialize(),
 	        dataType:"json",
@@ -347,7 +266,7 @@
             var formData = new FormData();
             formData.append("file", document.getElementById("real-file").files[0]);   
             ishowAjax({
-                url: WEB_SERVER_HOST+"/controller/uploadFile.php?type=pic",
+                url: WEB_SERVER_HOST+"../controller/uploadFile.php?type=pic",
                 type: "POST",
                 data: formData,
                 dataType:"json",
@@ -381,7 +300,7 @@
 	    });
 	});
 
-    $("#form-submit-userinfo").attr("action",WEB_SERVER_HOST+"/controller/updateUserInfo.php");
+    $("#form-submit-userinfo").attr("action",WEB_SERVER_HOST+"../controller/updateUserInfo.php");
     
     freshUserInfo();
 
