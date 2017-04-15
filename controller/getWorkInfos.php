@@ -34,12 +34,15 @@ class GetWorkInfos extends controllerBase {
             $res = $worksModel->getWorkInfos(array('wid' => $params['wid']));
         } else{
             $page = empty($params['page']) ? 1 : $params['page'];
-            $pagesize = empty($params['pagesize']) ? 25 : $params['pagesize'];
+            $pagesize = empty($params['pagesize']) ? 15 : $params['pagesize'];
             $condition = array(
                 'status' => 1
             );
             if (!empty($params['type'])){
                 $condition['type'] = $params['type'];
+            }
+            if (!empty($params['op'])) {
+                $condition['op'] = $params['op'];
             }
             $result = $worksModel->getWorkInfos($condition, $page, $pagesize);
             $total = $worksModel->getTotalOfWorks($condition);

@@ -44,6 +44,28 @@ stu_grzy.html 学生个人中心
 stu_zhgl.html 学生账号管理
 
 =========================================================================================================
+页面头         header.html
+页面尾         footer.html
+页面最下面     ender.html
+
+首页           index.html
+登陆/注册       login.html
+
+
+比赛推送       contest.html
+比赛详情       competitions.html
+
+竞赛指导       list-work.html (比赛经验， 优秀文案， 优秀ppt) 后两个没有完成
+
+添加比赛       addCompetitions.html
+添加作品       addWorks
+添加比赛经验   addCompetitionExp.html
+这三个添加图片没有实现
+
+优秀作品       production.html
+作品详情       single.html
+
+比赛报名       baoming.html
 
 个人中心：
     查看/修改 个人信息

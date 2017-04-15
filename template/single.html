@@ -1,0 +1,246 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>IShow大学生项目园 </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <!-- start slider -->
+    <link href="css/camera.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="js/jquery.min.js"></script>
+    <script type='text/javascript' src="js/jquery.mobile.customized.min.js"></script>
+    <script type='text/javascript' src="js/jquery.easing.1.3.js"></script>
+    <script type='text/javascript' src="js/camera.min.js"></script>
+    <script>
+        jQuery(function(){
+
+            jQuery('#camera_wrap_2').camera({
+
+                loader: 'bar',
+                pagination: false,
+                thumbnails: false
+            });
+        });
+    </script>
+    <!-- end slider -->
+</head>
+<body>
+<!--star wrap-->
+<div class="include" file="header.html"></div>
+<!--end wrap-->
+<!--top- heading-->
+<div class="top-heading">
+    <!--start-wrap-->
+    <div class="wrap">
+        <div class="title">
+            <div class="float-lt"><h1>详情介绍</h1></div>
+            <!--<form class="form-inline">
+                <div class="form-group float-rt">
+                    <input type="button" class="btn-search" value="搜索">
+                </div>
+                <div class="form-group float-rt">
+                    <input type="text" class="form-control " placeholder="搜索">
+                </div>
+            </form>-->
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!--end wrap-->
+</div>
+<!--start blog-->
+<div class="blog-content">
+    <section id="detail_main">
+        <div class="inner">
+            <header>
+                <h1 id="single-title"></h1>
+                <p id="single-time" class="info"></p>
+            </header>
+            <section class="content_xq">
+                <p id="single-content" ></p>
+            </section>
+            <div class="soci">
+                <ul>
+                    <li class="hvr-rectangle-out"><a id="dianzan" class="fb"></a></li>
+                    <li class="hvr-rectangle-out"><a id="shoucang" class="pin"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="response">
+            <h4>评论区</h4>
+            <hr>
+            <div id="pinglun">
+
+            </div>
+        </div>
+
+        <div class="comment-form">
+            <h2>我要评论</h2>
+            <div>
+                <span><textarea id="commentContent" rows="2" cols="70" placeholder="评论"></textarea></span>
+            </div>
+            <div>
+                <span><input id="submitComment" type="submit" placeholder="提交"></span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </section>
+    <!--end  blog-grids-->
+</div>
+
+<!--end blog-->
+<!--start footer-->
+<div class="include" file="footer.html"></div>
+<!--end footer-->
+<div class="include" file="ender.html"></div>
+<script type="text/javascript" src="js/include.js"></script>
+<script type="text/javascript" src="js/ishow.ajax.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var wid = GetQueryString("wid");
+        if (wid == null) {
+            alert("没有指明查看的id");
+        }
+        ishowAjax({
+            type: "post",
+            url:  "../controller/getWorkInfos.php",
+            cache: false,
+            data : {'wid': wid},
+            async: false,
+            dataType: "json",
+            success: function(json, status, jsXHR) {
+                if (json.code == 0) {
+                    if (json.data != null) {
+                        var h1 = document.getElementById("single-title");
+                        h1.innerHTML = json.data[0].title;
+                        var p = document.getElementById("single-time");
+                        p.innerHTML = formateDate(json.data[0].create_time);
+                        var p1 = document.getElementById("single-content");
+                        p1.innerHTML = json.data[0].content;
+                    } else {
+                        alert("不存在该作品");
+                    }
+                } else {
+                    alert(json.msg);
+                }
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        var wid = GetQueryString("wid");
+        ishowAjax({
+            type: "post",
+            url: "../controller/getComments.php",
+            data: {'obj': wid, 'type': 1, 'page': 1, 'pagesize': 1000},
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function (json, textStatus, jsXHR) {
+                if (0 == json.code) {
+                    if (json.data != null || json != undefined) {
+                        var div = document.getElementById("pinglun");
+                        $.each(json.data, function(key, value) {
+                            console.info(value);
+                            var div1 = document.createElement("div");
+                            div1.setAttribute("class", "media response-info");
+                            var div2 = document.createElement("div");
+                            div2.setAttribute("class", "media-left response-text-left");
+                            var a = document.createElement("a");
+                            a.href = "user.html?uname=" + value.uname;
+                            var img = document.createElement("img");
+                            img.src = value.headpic;
+                            a.appendChild(img);
+                            div2.appendChild(a);
+                            div1.appendChild(div2);
+                            var div3 = document.createElement("div");
+                            div3.setAttribute("class", "media-body response-text-right");
+                            var p = document.createElement("p");
+                            p.innerHTML = value.content;
+                            div3.appendChild(p);
+                            div1.appendChild(div3);
+                            var div4 = document.createElement("div");
+                            div4.setAttribute("class", "clearfix");
+                            div1.appendChild(div4);
+                            div.appendChild(div1);
+                        });
+                    }
+                } else {
+                    alert(json.msg);
+                }
+                return true;
+            },
+        })
+    });
+
+
+    $(document).ready(function() {
+        $("#submitComment").click(function() {
+            var wid = GetQueryString("wid");
+            var commentContent = document.getElementById("commentContent").value;
+            ishowAjax({
+                type: "post",
+                url: "../controller/addComment.php",
+                data: {'obj': wid, 'type': 1, 'content': commentContent},
+                cache: false,
+                async: false,
+                dataType: "json",
+                success: function (json, textStatus, jsXHR) {
+                    if (0 == json.code) {
+                        alert("评论成功");
+                    } else {
+                        alert(json.msg);
+                    }
+                    return true;
+                },
+            })
+        })
+    });
+
+    $(document).ready(function () {
+        $("#shoucang").click(function () {
+            var wid = GetQueryString("wid");
+            ishowAjax({
+                type: "post",
+                url: "../controller/addCollections.php",
+                data: {'obj': wid, 'type': 1},
+                cache: false,
+                async: false,
+                dataType: "json",
+                success: function (json, textStatus, jsXHR) {
+                    if (0 == json.code) {
+                        alert("收藏成功");
+                    } else {
+                        alert(json.msg);
+                    }
+                    return true;
+                },
+            })
+        });
+    });
+
+    $(document).ready(function () {
+        $("#dianzan").click(function () {
+            var wid = GetQueryString("wid");
+            ishowAjax({
+                type: "post",
+                url: "../controller/addVote.php",
+                data: {'obj': wid, 'type': 1},
+                cache: false,
+                async: false,
+                dataType: "json",
+                success: function (json, textStatus, jsXHR) {
+                    if (0 == json.code) {
+                        alert("点赞成功");
+                    } else {
+                        alert(json.msg);
+                    }
+                    return true;
+                },
+            })
+        });
+    });
+</script>
+</body>
+</html>

@@ -10,8 +10,8 @@ require_once 'Model.php';
 class WorksModel extends Model {
     protected $_tbName = '`tblWorks`';
 
-    public function getWorkInfos($condition, $page = 1, $pagesize = 25) {
-        $sql = 'SELECT `wid`, `title`, `content`, `create_time`, `create_uid`, `comment_num`, `collection_num`, `brower_num`, `status`, `vote_num`, `title_key`, `file_url`
+    public function getWorkInfos($condition, $page = 1, $pagesize = 15) {
+        $sql = 'SELECT `wid`, `title`, `content`, `create_time`, `create_uid`, `comment_num`, `collection_num`, `type`, `pic`, `brower_num`, `status`, `vote_num`, `title_key`, `file_url`
                 FROM ' . $this->_tbName;
         $whereArr = array();
         if (!empty($condition['wid'])) {
@@ -29,6 +29,11 @@ class WorksModel extends Model {
         }
         if (!empty($condition['type'])) {
             $whereArr['type'] = '`type` = ' . $condition['type'];
+        }
+        if (!empty($condition['op']) && $condition['op'] == 'exp') {
+            $whereArr['op'] = '`type` < 20';
+        } else {
+            $whereArr['op'] = '`type` >= 20';
         }
         if (!empty($condition['status'])) {
             $whereArr['status'] = '`status` = ' . $condition['status'];
@@ -83,6 +88,11 @@ class WorksModel extends Model {
         }
         if (!empty($condition['title_key'])) {
             $whereArr['title_key'] = "`title_key` = '" . $condition['title_key'] . "'";
+        }
+        if (!empty($condition['op']) && $condition['op'] == 'exp') {
+            $whereArr['op'] = '`type` < 20';
+        } else {
+            $whereArr['op'] = '`type` >= 20';
         }
         if (!empty($condition['create_uid'])) {
             $whereArr['create_uid'] = '`create_uid` = ' . $condition['create_uid'];

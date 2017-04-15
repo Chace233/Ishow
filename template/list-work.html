@@ -127,16 +127,19 @@
         var type = GetQueryString("type");
         var page = GetQueryString("page");
         var pagesize = GetQueryString("pagesize");
+        if (type == null) {
+            type = 0;
+        }
         if (page == null || page == undefined || page == "") {
             page = 1;
         }
         if (pagesize == null || pagesize == undefined || pagesize == "") {
-            pagesize = 25;
+            pagesize = 15;
         }
         ishowAjax({
             type: "post",
             url:  "../controller/getWorkInfos.php",
-            data: {'type': type, 'page': page, 'pagesize': pagesize},
+            data: {'type': type, 'page': page, 'pagesize': pagesize, 'op': "exp"},
             cache: false,
             async: false,
             dataType: "json",
@@ -166,12 +169,11 @@
                             });
                         }
                         if (json.data.total > json.data.pagesize) {
-                            var type = GetQueryString("type");
                             var ul = document.getElementById("page-ul");
                             for (var i = 1; i < (json.data.total/json.data.pagesize) + 1; i++) {
                                 var li = document.createElement("li");
                                 var a = document.createElement("a");
-                                a.href = "list-work.html?type=" + type + "&page=" + i +"&pagesize=" + json.data.pagesize;
+                                a.href = "list-work.html?op=exp&type=" + type + "&page=" + i +"&pagesize=" + json.data.pagesize;
                                 a.innerHTML = i;
                                 li.appendChild(a);
                                 if (json.data.page == i) {
