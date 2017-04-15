@@ -22,6 +22,7 @@
 	<script src="js/amazeui.min.js"></script>
 	<script src="js/handlebars.min.js"></script>
 	<script src="js/amazeui.widgets.helper.min.js"></script>
+	<script src="js/ishow.ajax.js"></script>
     <script>
 		jQuery(function(){
 
@@ -128,7 +129,8 @@
 		<!--about-grids-->
 		<div class="main-grid">
 			<div class="grid-left">
-				<section data-am-widget="accordion" class="am-accordion am-accordion-default"data-am-accordion='{  }'>
+				<section id="section-collections" data-am-widget="accordion" class="am-accordion am-accordion-default"data-am-accordion='{  }'>
+				  <!--
 				  <dl class="am-accordion-item am-active">
 				    <dt class="am-accordion-title">经验 | 浅谈全国大学生英语竞赛经验</dt>
 				    <dd class="am-accordion-content am-collapse am-in"><small>发布时间：2017-01-10 14:00:00 浏览次数：16<br><br></small>
@@ -191,15 +193,17 @@
 				    <dd class="am-accordion-content am-collapse "><small>发布时间：2014-10-31 14:00:00 浏览次数：16<br><br></small>
 				    活动时间：10月31日14:00-15：40<br>活动地点：望江校区基教A508教室<br>活动名称：PMC大赛交流分享会<br>活动主办方：高材发展研学会<br>活动简介：由参加了中国大学生高分子材料创新创业大赛（PMC）决赛并获得佳绩的两支优秀本科生队伍来分享参赛过程中的点滴，详细讲述赛前准备工作，参赛技巧,以及赛后心得，帮助有意参加的同学在下一届大赛中获得更好的成绩。</dd>
 				  </dl>
-				  
+				-->
 				</section>
 				<div class="txt-center">
 				<div class="page-numbers ">										
 					<ul>
 						<li class="active"><a href="#">1</a></li>
+						<!--
 						<li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
-						<li><a href="#">》</a></li>
+					    -->
+						<li><a href="#">...</a></li>
 						<div class="clear"> </div>
 					</ul>										
 				</div></div>
@@ -223,10 +227,12 @@
 					<h6> </h6>
 					<div class="clear"> </div>
 				</div>
+				<!--
 				<ul class="seach-links">
 			    <li><a href="yxwa-xmjs.html">历史记录</a></li>
 				<li><a href="yxwa-xmjt.html">现在发布</a></li>
 				</ul>
+			    -->
 				<div class="grid-right-headings">
 					<h2><a href="#">账号管理</a></h2>
 					<h6> </h6>
@@ -295,5 +301,37 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+//works
+ishowAjax({
+    url:WEB_SERVER_HOST+"/controller/myCollections.php",
+    type:"get",
+    dataType:"json",
+    success: function(d){
+    	console.log(d);
+        if(d.code === 0){
+        	for(var i=0;i<d.data.length;i++){
+        	    if (d.data[i].create_time === null) continue;
+                var ntime = new Date(d.data[i].create_time*1000);
+            	$("#section-collections").append("<dl class='am-accordion-item am-active'>"+
+				    "<dt class='am-accordion-title'>"+d.data[i].title+"</dt>"+
+				    "<dd class='am-accordion-content  am-collapse am-in'>"+
+				    "<small>发布时间："+ntime.toLocaleString()+
+				    " 浏览次数："+0+"<br><br></small><p style='word-wrap:break-word;word-break:normal;'>"+d.data[i].content+
+				    "</p></dd>"+
+				    "</dl>");
+        	}
+        }else{
+        	console.error(d.msg);
+    	    alert("作品信息加载失败");
+        }
+    },
+    error: function(){
+    	alert("作品信息加载失败");
+    }
+});
+
+</script>
 </body>
 </html>
