@@ -319,10 +319,8 @@ ishowAjax({
     type:"get",
     dataType:"json",
     success: function(d){
-        	console.log(gallery_limit,d);
         if(d.code === 0){
         	var slider_limit = d.data.page > SLIDER_SIZE ? SLIDER_SIZE : d.data.page;
-        	var gallery_limit= d.data.page > GALLERY_SIZE ? GALLERY_SIZE : d.data.page;
         	var com_limit    = d.data.page > 6 ? 6 : d.data.page;
         	/*
         	for(var i=0;i<slider_limit;i++){
@@ -350,7 +348,7 @@ ishowAjax({
 
 
         	for(var i=0;i<com_limit;i++){
-            	$("#div-artcle-competition").append("<p><a href='"+"#"+"'>"+d.data.list[i].title+
+            	$("#div-artcle-competition").append("<p><a href='competitions.html?cpid="+d.data.list[i].cpid+"'>"+d.data.list[i].title+
             		"</a><br><small>比赛时间："+
             		new Date(d.data.list[i].create_time*1000).toLocaleString()+
             		"</small></p>");
@@ -368,15 +366,31 @@ ishowAjax({
 
 //works
 ishowAjax({
-    url:WEB_SERVER_HOST+"../controller/getWorkInfos.php",
+
+    url:WEB_SERVER_HOST+"../controller/getWorkInfos.php?op=exp&type=1",
     type:"get",
     dataType:"json",
     success: function(d){
         if(d.code === 0){
         	var com_limit    = d.data.page > 6 ? 6 : d.data.page;
+        	var gallery_limit= d.data.page > GALLERY_SIZE ? GALLERY_SIZE : d.data.page;
+        	
+            for(var i=0;i<gallery_limit;i++){
+            	var ntime = new Date(d.data.list[i].create_time*1000);
+            	$("#gallerylist").append("<div class='gallerylist-wrapper'>"+			
+						"<a href='single.html?wid="+d.data.list[i].wid+"'>"+
+							"<img src='"+GalleryImageList[i].src+"''/>"+
+							"<span><img src='images/plus.png'/> </span>"+
+							"<div class='desc'>"+
+							 	"<h2>"+d.data.list[i].title+"</h2>"+
+							 	"<h3>"+ntime.getFullYear() + "-" + (ntime.getMonth() + 1) + "-" + ntime.getDate()+"</h3>"+			                            
+							"</div>"+
+						"</a>"+
+					"</div>");
+        	}
 
         	for(var i=0;i<com_limit;i++){
-            	$("#div-artcle-work").append("<p><a href='"+"#"+"'>"+d.data.list[i].title+
+            	$("#div-artcle-work").append("<p><a href='single.html?wid="+d.data.list[i].wid+"'>"+d.data.list[i].title+
             		"</a><br><small>上传时间："+
             		new Date(d.data.list[i].create_time*1000).toLocaleString()+
             		"</small></p>");

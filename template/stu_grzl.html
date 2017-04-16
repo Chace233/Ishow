@@ -62,7 +62,15 @@
 </head>
 <body>
 <!--star wrap-->      
+<<<<<<< HEAD
 <div class="include" file="header.html"></div>
+=======
+<div class="wrap">	
+<!--header--> 
+<div class="include" file="header.html"></div>
+<!--end-header-->
+</div>
+>>>>>>> 42b5a4b3619a428bb11ed1db180ace6e9e004eff
 <!--end wrap-->   
 <!--top- heading-->
 <div class="top-heading">
@@ -179,11 +187,20 @@
 </div>
 <!--about-content-->
 <!--end about-->
+<<<<<<< HEAD
 <!--start footer-->
 <div class="include" file="footer.html"></div>
 <!--end footer-->
 <div class="include" file="ender.html"></div>
 <script type="text/javascript" src="js/include.js"></script>
+=======
+
+<!--start footer-->
+<div class="include" file="footer.html"></div>
+<div class="include" file="ender.html"></div>
+<!--end footer-->
+<script src="js/include.js"></script>
+>>>>>>> 42b5a4b3619a428bb11ed1db180ace6e9e004eff
 
 <div id="imgWait" class="imgWait">上传中...</div>
 
@@ -213,7 +230,7 @@
 
     var freshUserInfo = function(){
 	    ishowAjax({
-	        url:WEB_SERVER_HOST+"/controller/GetUserInfos.php",
+	        url:WEB_SERVER_HOST+"../controller/GetUserInfos.php",
 	        type:"get",
 	        dataType:"json",
 		    success:function(d){
@@ -237,7 +254,7 @@
     var modUserHeadInfo = function(pic_url){
     	$("#text-userhead-url").attr("value", pic_url);
         ishowAjax({
-	        url:WEB_SERVER_HOST+"/controller/updateUserInfo.php",
+	        url:WEB_SERVER_HOST+"../controller/updateUserInfo.php",
 	        type:"get",
 	        data:$("#form-submit-userhead").serialize(),
 	        dataType:"json",
@@ -260,7 +277,7 @@
             var formData = new FormData();
             formData.append("file", document.getElementById("real-file").files[0]);   
             ishowAjax({
-                url: WEB_SERVER_HOST+"/controller/uploadFile.php?type=pic",
+                url: WEB_SERVER_HOST+"../controller/uploadFile.php?type=pic",
                 type: "POST",
                 data: formData,
                 dataType:"json",
@@ -294,7 +311,7 @@
 	    });
 	});
 
-    $("#form-submit-userinfo").attr("action",WEB_SERVER_HOST+"/controller/updateUserInfo.php");
+    $("#form-submit-userinfo").attr("action",WEB_SERVER_HOST+"../controller/updateUserInfo.php");
     
     freshUserInfo();
 

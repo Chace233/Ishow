@@ -20,6 +20,12 @@ class WorksModel extends Model {
             } else {
                 $whereArr['wid'] = '`wid` = ' . $condition['wid'];
             }
+            if (!empty($whereArr)) {
+                $sql .= ' WHERE ' . implode(' AND ', $whereArr);
+            }
+            $sql .= ' ORDER BY `create_time` DESC LIMIT ' . ($page - 1) * $pagesize . ', ' . $pagesize;
+            $res = $this->Query($sql);
+            return $res;
         }
         if (!empty($condition['title_key'])) {
             $whereArr['title_key'] = "`title_key` = '" . $condition['title_key'] . "'";
@@ -32,7 +38,7 @@ class WorksModel extends Model {
         }
         if (!empty($condition['op']) && $condition['op'] == 'exp') {
             $whereArr['op'] = '`type` < 20';
-        } else {
+        }else {
             $whereArr['op'] = '`type` >= 20';
         }
         if (!empty($condition['status'])) {
