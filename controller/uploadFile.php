@@ -91,7 +91,7 @@ class UploadFile extends controllerBase {
             aj_output(ErrorMsg::ERRUPLOAD);
         }
         $res = array(
-            'url' => 'http://127.0.0.1/template/images/upload/' . $tmpFileName,
+            'url' => 'http://101.200.59.83/template/images/upload/' . $tmpFileName,
         );
         aj_output(ErrorMsg::SUCCESS, '' , $res);
 

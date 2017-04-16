@@ -320,8 +320,8 @@ ishowAjax({
     dataType:"json",
     success: function(d){
         if(d.code === 0){
-        	var slider_limit = d.data.page > SLIDER_SIZE ? SLIDER_SIZE : d.data.page;
-        	var com_limit    = d.data.page > 6 ? 6 : d.data.page;
+        	var slider_limit = d.data.total > SLIDER_SIZE ? SLIDER_SIZE : d.data.total;
+        	var com_limit    = d.data.total > 6 ? 6 : d.data.total;
         	/*
         	for(var i=0;i<slider_limit;i++){
             	$("#camera_wrap_2").append("<div data-src='"+SliderImageList[i].src+"'>"+
@@ -358,8 +358,8 @@ ishowAjax({
     dataType:"json",
     success: function(d){
         if(d.code === 0){
-        	var com_limit    = d.data.page > 6 ? 6 : d.data.page;
-        	var gallery_limit= d.data.page > GALLERY_SIZE ? GALLERY_SIZE : d.data.page;
+        	var com_limit    = d.data.total > 6 ? 6 : d.data.total;
+        	var gallery_limit= d.data.total > GALLERY_SIZE ? GALLERY_SIZE : d.data.total;
         	
             for(var i=0;i<gallery_limit;i++){
             	var ntime = new Date(d.data.list[i].create_time*1000);
