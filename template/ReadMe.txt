@@ -63,7 +63,7 @@ stu_zhgl.html 学生账号管理
 这三个添加图片没有实现
 
 优秀作品       production.html
-作品详情       single.html
+作品详情       single.html?wid=
 
 比赛报名       baoming.html
 

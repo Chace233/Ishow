@@ -332,6 +332,19 @@ ishowAjax({
 	            "</div>");
         	}
         	//*/
+            for(var i=0;i<gallery_limit;i++){
+            	var ntime = new Date(d.data.list[i].create_time*1000);
+            	$("#gallerylist").append("<div class='gallerylist-wrapper'>"+			
+						"<a href="+"competitions.html?wid="+ d.data.list[i].wid +">"+
+							"<img src='"+GalleryImageList[i].src+"''/>"+
+							"<span><img src='images/plus.png'/> </span>"+
+							"<div class='desc'>"+
+							 	"<h2>"+d.data.list[i].title+"</h2>"+
+							 	"<h3>"+ntime.getFullYear() + "-" + (ntime.getMonth() + 1) + "-" + ntime.getDate()+"</h3>"+			                            
+							"</div>"+
+						"</a>"+
+					"</div>");
+        	}
 
 
         	for(var i=0;i<com_limit;i++){
@@ -353,7 +366,8 @@ ishowAjax({
 
 //works
 ishowAjax({
-    url:WEB_SERVER_HOST+"../controller/getWorkInfos.php?op=exp&type=1",
+
+    url:WEB_SERVER_HOST+"../controller/getWorkInfos.php?",
     type:"get",
     dataType:"json",
     success: function(d){
