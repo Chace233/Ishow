@@ -315,7 +315,7 @@ var GalleryImageList   = [
 
 //competitions
 ishowAjax({
-    url:WEB_SERVER_HOST+"/controller/getCompetitions.php",
+    url:WEB_SERVER_HOST+"../controller/getCompetitions.php",
     type:"get",
     dataType:"json",
     success: function(d){
@@ -337,7 +337,7 @@ ishowAjax({
             for(var i=0;i<gallery_limit;i++){
             	var ntime = new Date(d.data.list[i].create_time*1000);
             	$("#gallerylist").append("<div class='gallerylist-wrapper'>"+			
-						"<a href="+"#"+">"+
+						"<a href="+"competitions.html?wid="+ d.data.list[i].wid +">"+
 							"<img src='"+GalleryImageList[i].src+"''/>"+
 							"<span><img src='images/plus.png'/> </span>"+
 							"<div class='desc'>"+
@@ -368,7 +368,7 @@ ishowAjax({
 
 //works
 ishowAjax({
-    url:WEB_SERVER_HOST+"/controller/getWorkInfos.php",
+    url:WEB_SERVER_HOST+"../controller/getWorkInfos.php",
     type:"get",
     dataType:"json",
     success: function(d){
