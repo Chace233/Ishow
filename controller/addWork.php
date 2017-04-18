@@ -37,6 +37,15 @@ class AddWork extends controllerBase {
             'type'        => empty($params['type']) ? 0 : $params['type'],
             'file_url'    => empty($params['file_url']) ? '' : $params['file_url'],
         );
+        if ($params['type'] == 20) {
+            $addArr['pic'] = 'images/image2.jpg';
+        } else if ($params['type'] == 21) {
+            $addArr['pic'] = 'images/image2-1.jpg';
+        } else if ($params['type'] == 22) {
+            $addArr['pic'] = 'images/image3.jpg';
+        } else if ($params['type'] == 23) {
+            $addArr['pic'] = 'images/image3-1.jpg';
+        }
         $worksModel->startTransaction();
         $res = $worksModel->addWork($addArr);
         if (false === $res) {
