@@ -60,7 +60,6 @@
                     async: false,
                     dataType: "json",
                     success: function(json, textStatus, jsXHR) {
-                        console.info(json.code);
                         if (0 == json.code) {
                             alert("提交成功");
                         } else {

@@ -1,0 +1,303 @@
+-- MySQL dump 10.16  Distrib 10.1.9-MariaDB, for Win32 (AMD64)
+--
+-- Host: localhost    Database: Ishow
+-- ------------------------------------------------------
+-- Server version	10.1.9-MariaDB-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `tblcollections`
+--
+
+DROP TABLE IF EXISTS `tblcollections`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tblcollections` (
+  `ccid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `uid` int(10) unsigned NOT NULL,
+  `obj_id` int(10) unsigned NOT NULL COMMENT '收藏内容ID',
+  `obj_type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '收藏内容类型： 1-作品 | 2-比赛',
+  `create_time` int(3) unsigned NOT NULL,
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '状态： 1-正常 | 2-删除',
+  PRIMARY KEY (`ccid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='收藏表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tblcollections`
+--
+
+LOCK TABLES `tblcollections` WRITE;
+/*!40000 ALTER TABLE `tblcollections` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tblcollections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tblcomment`
+--
+
+DROP TABLE IF EXISTS `tblcomment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tblcomment` (
+  `cid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `obj_id` int(10) unsigned NOT NULL COMMENT '评论事物的ID',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '类型：1-作品 | 2-比赛',
+  `content` varbinary(20000) NOT NULL DEFAULT '',
+  `uid` int(10) unsigned NOT NULL,
+  `create_time` int(10) unsigned NOT NULL,
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '状态： 1-正常 | 2-删除',
+  PRIMARY KEY (`obj_id`,`type`,`uid`),
+  UNIQUE KEY `cid` (`cid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tblcomment`
+--
+
+LOCK TABLES `tblcomment` WRITE;
+/*!40000 ALTER TABLE `tblcomment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tblcomment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tblcompetitions`
+--
+
+DROP TABLE IF EXISTS `tblcompetitions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tblcompetitions` (
+  `cpid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varbinary(1000) NOT NULL,
+  `content` varbinary(20000) NOT NULL,
+  `create_time` int(10) unsigned NOT NULL,
+  `status` tinyint(3) unsigned NOT NULL COMMENT '状态：1-正常 | 2-删除',
+  `download` varbinary(20000) NOT NULL DEFAULT '',
+  `start_time` varchar(10) NOT NULL DEFAULT '',
+  `end_time` varchar(10) NOT NULL DEFAULT '',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '类型 0-爬去的比赛信息|10-校方添加的信息| 其余为比赛类型',
+  `pic` varbinary(1000) NOT NULL DEFAULT '',
+  PRIMARY KEY (`cpid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='比赛信息表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tblcompetitions`
+--
+
+LOCK TABLES `tblcompetitions` WRITE;
+/*!40000 ALTER TABLE `tblcompetitions` DISABLE KEYS */;
+INSERT INTO `tblcompetitions` VALUES (1,'title01','contentContentContentContentContentContentContentContentContentContentContentContent',1491906498,1,'','1491868800','1492128000',10,'');
+/*!40000 ALTER TABLE `tblcompetitions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tblfeedback`
+--
+
+DROP TABLE IF EXISTS `tblfeedback`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tblfeedback` (
+  `bid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL,
+  `title` varbinary(1000) NOT NULL,
+  `content` varbinary(20000) NOT NULL,
+  `tel` varchar(11) NOT NULL,
+  `email` varbinary(50) DEFAULT NULL COMMENT '邮箱',
+  `create_time` int(10) unsigned NOT NULL,
+  `status` tinyint(3) unsigned NOT NULL COMMENT '状态：1-正常 | 2-删除',
+  PRIMARY KEY (`bid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='反馈建议表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tblfeedback`
+--
+
+LOCK TABLES `tblfeedback` WRITE;
+/*!40000 ALTER TABLE `tblfeedback` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tblfeedback` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tblnotification`
+--
+
+DROP TABLE IF EXISTS `tblnotification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tblnotification` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态：0-未读，1-已读，2-删除',
+  `uid` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户通知类型: 1-作品|2-文章',
+  `obj_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评论对象id',
+  `from_uid` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '来源uid',
+  `notify_num` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '消息数目',
+  `read_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '值为0时为已阅读后未更新，大于0时为更新消息数目时的时间戳',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建的时间',
+  `notify_status` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx_uid_type_qid` (`uid`,`type`,`obj_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户消息通知数据表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tblnotification`
+--
+
+LOCK TABLES `tblnotification` WRITE;
+/*!40000 ALTER TABLE `tblnotification` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tblnotification` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tblscores`
+--
+
+DROP TABLE IF EXISTS `tblscores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tblscores` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `action` int(3) unsigned NOT NULL COMMENT '操作类型',
+  `scores` int(3) unsigned NOT NULL,
+  `uid` int(10) unsigned NOT NULL COMMENT '获得积分的用户ID',
+  `from_uid` int(10) unsigned NOT NULL DEFAULT '0',
+  `create_time` int(10) unsigned NOT NULL,
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='积分表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tblscores`
+--
+
+LOCK TABLES `tblscores` WRITE;
+/*!40000 ALTER TABLE `tblscores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tblscores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbluser`
+--
+
+DROP TABLE IF EXISTS `tbluser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbluser` (
+  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `uname` varbinary(128) NOT NULL COMMENT '用户名',
+  `tel` varchar(11) DEFAULT NULL COMMENT '电话',
+  `email` varbinary(50) DEFAULT NULL COMMENT '邮箱',
+  `intro` varbinary(128) DEFAULT NULL COMMENT '简介',
+  `feature` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户等级：1-普通用户 | 2-校方用户 | 10-管理员',
+  `create_time` int(10) unsigned NOT NULL COMMENT '创建时间',
+  `islogin` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否登录：0-未登录 | 1-已登录',
+  `headpic` varbinary(128) DEFAULT NULL COMMENT '头像地址',
+  `passwd` varchar(32) NOT NULL COMMENT '密码',
+  PRIMARY KEY (`uid`),
+  UNIQUE KEY `uname` (`uname`)
+) ENGINE=InnoDB AUTO_INCREMENT=1491909345 DEFAULT CHARSET=utf8 COMMENT='用户表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbluser`
+--
+
+LOCK TABLES `tbluser` WRITE;
+/*!40000 ALTER TABLE `tbluser` DISABLE KEYS */;
+INSERT INTO `tbluser` VALUES (1491717354,'陈小小','18428366999','chenxiaoxiao@qq.com','test',1,1491717353,0,'','827ccb0eea8a706c4c34a16891f84e7b'),(1491906454,'陈管理','18428366999','chenxiaoxiao@qq.com','test',10,1491906453,0,'','827ccb0eea8a706c4c34a16891f84e7b'),(1491909344,'test','','test@qq.com','',1,1491909343,0,'','098f6bcd4621d373cade4e832627b4f6');
+/*!40000 ALTER TABLE `tbluser` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tblvote`
+--
+
+DROP TABLE IF EXISTS `tblvote`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tblvote` (
+  `vid` int(10) unsigned NOT NULL,
+  `obj_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点赞事物的ID',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '类型：1-作品 | 2-评论',
+  `uid` int(10) unsigned NOT NULL COMMENT '点赞者ID',
+  `uid2` int(10) unsigned NOT NULL COMMENT '被点赞者ID',
+  `create_time` int(10) unsigned NOT NULL,
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '点赞状态： 1-已点赞 | 2-已取消',
+  PRIMARY KEY (`obj_id`,`type`,`uid`),
+  UNIQUE KEY `vid` (`vid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='点赞表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tblvote`
+--
+
+LOCK TABLES `tblvote` WRITE;
+/*!40000 ALTER TABLE `tblvote` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tblvote` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tblworks`
+--
+
+DROP TABLE IF EXISTS `tblworks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tblworks` (
+  `wid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '作品ID',
+  `title` varbinary(1000) NOT NULL,
+  `content` varbinary(20000) NOT NULL DEFAULT '',
+  `create_time` int(10) unsigned NOT NULL,
+  `create_uid` int(10) unsigned NOT NULL,
+  `comment_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评论数',
+  `collection_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '收藏数',
+  `brower_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览数',
+  `title_key` binary(32) NOT NULL DEFAULT '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '状态： 1-正常 | 2-删除',
+  `vote_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点赞数',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '作品类型 0-没有类型',
+  `pic` varbinary(1000) NOT NULL DEFAULT '' COMMENT '作品添加的图片地址',
+  `file_url` varbinary(1000) NOT NULL DEFAULT '' COMMENT '上传作品/文件的地址;',
+  PRIMARY KEY (`wid`),
+  UNIQUE KEY `title_key` (`title_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='作品表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tblworks`
+--
+
+LOCK TABLES `tblworks` WRITE;
+/*!40000 ALTER TABLE `tblworks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tblworks` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-04-12 12:49:09

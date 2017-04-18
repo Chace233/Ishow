@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>IShow大学生项目园</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="css/amazeui.widgets.min.css">
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- start slider -->
+    <link href="css/camera.css" rel="stylesheet" type="text/css" media="all" />
+
+    <script src="js/jquery.js"></script>
+    <!-- <script type='text/javascript' src="js/jquery.mobile.customized.min.js"></script>
+     <script type='text/javascript' src="js/jquery.easing.1.3.js"></script>
+     <script type='text/javascript' src="js/camera.min.js"></script>
+     <script src="js/zepto.min.js"></script>
+     <script src="js/amazeui.min.js"></script>
+     <script src="js/handlebars.min.js"></script>
+     <script src="js/amazeui.widgets.helper.min.js"></script>-->
+    <script src="js/ishow.ajax.js"></script>
+    <style type="text/css">
+        .btn-search{
+            margin-left: 0px;
+        }
+        .form-control {
+            height: 36px;
+        }
+
+
+        .imgWait {
+            width:100%;
+            height:100%;
+            background-color:#000;
+            filter:alpha(opacity=50);
+            -moz-opacity:0.5;
+            opacity:0.5;
+            position:absolute;
+            left:0px;
+            top:0px;
+            display:none;
+            z-index:1000;
+        }
+    </style>
+</head>
+<body>
+<!--star wrap-->
+<div class="include" file="header.html"></div>
+<!--end wrap-->
+<!--top- heading-->
+<div class="top-heading">
+    <!--start-wrap-->
+    <div class="wrap">
+        <div class="title">
+            <div class="float-lt"><h1>添加作品</h1></div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!--end wrap-->
+</div>
+
+<!--about-content-->
+<div class="wrap">
+    <div class="content">
+        <!--about-grids-->
+        <div class="main-grid">
+            <div class="grid-left">
+                <!-- start slider -->
+                <div class="contact">
+                    <div class="company_address">
+                    </div>
+                    <div class="contact-form">
+                        <div>
+                            <input id="titleValue" type="text" class="textbox right" placeholder="标题">
+                        </div>
+                        <div class="clear"></div>
+                        <br>
+                        <div>
+                            <select id="typeValue" class="textbox right">
+                                <option value="11">项目申请</option>
+                                <option value="12">项目介绍</option>
+                                <option value="13">项目结题</option>
+                                <option value="14">优秀PPT</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div id="uploadForm">
+                            <input id="file" type="file"/>
+                            <br>
+                            <input id="upload" type="submit">上传文件</input>
+                        </div>
+                        <br>
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <!--end blog-left-->
+            <div class="clear"> </div>
+        </div>
+        <!--end about-grids-->
+    </div>
+</div>
+<!--start footer-->
+<div class="include" file="footer.html"></div>
+<!--end footer-->
+<div class="include" file="ender.html"></div>
+<script src="js/include.js"></script>
+<script>
+    $(document).ready(function($) {
+        $('#upload').click(function() {
+            var title = document.getElementById("titleValue").value;
+            if (title == null || title == undefined || title == '') {
+                alert("标题不能为空");
+                return false;
+            }
+            var type = document.getElementById("typeValue").value;
+
+            var formData = new FormData();
+            formData.append('file', $('#file')[0].files[0]);
+            $.ajax({
+                url: '../controller/upload.php',
+                type: 'POST',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function(res) {
+                var res = JSON.parse(res);
+                console.info(res.data.url);
+                if (res.code == 0) {
+                    ishowAjax({
+                        type: "post",
+                        url: "../controller/addWork.php",
+                        data: {'title':title, 'type': type, 'file_url': res.data.url},
+                        cache: false,
+                        async: false,
+                        dataType: "json",
+                        success: function(json, textStatus, jsXHR) {
+                            console.info(json);
+                            if (0 == json.code) {
+                                alert("提交成功");
+                            } else {
+                                alert(json.msg);
+                            }
+                            return true;
+                        },
+                        error:function (XMLHttpRequest, textStatus, errorThrow) {
+                            console.info(errorThrow);
+                            return false;
+                        }
+                    });
+                } else {
+                    alert(res.msg);
+                }
+            }).fail(function(res) {
+
+            });
+
+        });
+    });
+</script>
+</body>
+</html>

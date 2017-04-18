@@ -149,23 +149,45 @@
                         var select = document.getElementsByTagName("section")[0];
                         if (json.data.list != null) {
                             $.each(json.data.list, function(key, value) {
-                                var dl = document.createElement("dl");
-                                dl.setAttribute("class", "am-accordion-item");
-                                var dt = document.createElement("dt");
-                                dt.setAttribute("class", "am-accordion-title");
-                                dt.innerHTML = value.title;
-                                var dd = document.createElement("dd");
-                                dd.setAttribute("class", "am-accordion-content am-collapse");
-                                var small = document.createElement("small");
-                                var time = formateDate(value.create_time);
-                                small.innerHTML = "发布时间：" + time + " 浏览次数：" + value.brower_num + "<br><br>";
-                                dd.appendChild(small);
-                                var p = document.createElement("p");
-                                p.innerHTML = value.content;
-                                dd.appendChild(p);
-                                dl.appendChild(dt);
-                                dl.appendChild(dd);
-                                select.appendChild(dl);
+                                if (value.type >=10 && value.type < 20) {
+                                    var dl = document.createElement("dl");
+                                    dl.setAttribute("class", "am-accordion-item");
+                                    var dt = document.createElement("dt");
+                                    dt.setAttribute("class", "am-accordion-title");
+                                    dt.innerHTML = value.title;
+                                    var dd = document.createElement("dd");
+                                    dd.setAttribute("class", "am-accordion-content am-collapse");
+                                    var small = document.createElement("small");
+                                    var time = formateDate(value.create_time);
+                                    small.innerHTML = "发布时间：" + time + " 浏览次数：" + value.brower_num + "<br><br>";
+                                    dd.appendChild(small);
+                                    var a = document.createElement("a");
+                                    a.innerHTML = "文件下载";
+                                    a.href = value.file_url;
+                                    a.setAttribute("download", "文件下载")
+                                    dd.appendChild(a);
+                                    dl.appendChild(dt);
+                                    dl.appendChild(dd);
+                                    select.appendChild(dl);
+                                } else {
+                                    var dl = document.createElement("dl");
+                                    dl.setAttribute("class", "am-accordion-item");
+                                    var dt = document.createElement("dt");
+                                    dt.setAttribute("class", "am-accordion-title");
+                                    dt.innerHTML = value.title;
+                                    var dd = document.createElement("dd");
+                                    dd.setAttribute("class", "am-accordion-content am-collapse");
+                                    var small = document.createElement("small");
+                                    var time = formateDate(value.create_time);
+                                    small.innerHTML = "发布时间：" + time + " 浏览次数：" + value.brower_num + "<br><br>";
+                                    dd.appendChild(small);
+                                    var p = document.createElement("p");
+                                    p.innerHTML = value.content;
+                                    dd.appendChild(p);
+                                    dl.appendChild(dt);
+                                    dl.appendChild(dd);
+                                    select.appendChild(dl);
+                                }
                             });
                         }
                         if (json.data.total > json.data.pagesize) {

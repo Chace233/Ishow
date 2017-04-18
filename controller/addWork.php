@@ -11,7 +11,7 @@ require_once '../module/WorksModel.php';
 require_once '../module/ScoresModel.php';
 
 class AddWork extends controllerBase {
-    protected $_fields = array('title', 'content', 'type');
+    protected $_fields = array('title', 'content', 'type', 'file_url');
 
     public function __construct() {
         $this->run();
@@ -19,7 +19,7 @@ class AddWork extends controllerBase {
 
     public function run() {
         $params = $this->getParams();
-        if (empty($params['title']) || empty($params['content'])) {
+        if (empty($params['title'])) {
             aj_output(ErrorMsg::ERROR_ARGUMENT);
         }
         $worksModel = new WorksModel();
@@ -35,6 +35,7 @@ class AddWork extends controllerBase {
             'title_key'   => md5($params['title']),
             'status'      => 1,
             'type'        => empty($params['type']) ? 0 : $params['type'],
+            'file_url'    => empty($params['file_url']) ? '' : $params['file_url'],
         );
         $worksModel->startTransaction();
         $res = $worksModel->addWork($addArr);
